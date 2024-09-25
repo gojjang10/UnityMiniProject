@@ -181,6 +181,7 @@ public class MarioController : MonoBehaviour
             SoundManager.Instance.PlaySFX(jump);
 
 
+
         }
 
         public override void Update(MarioController mario)
