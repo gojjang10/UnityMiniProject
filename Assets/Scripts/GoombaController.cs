@@ -5,6 +5,7 @@ using UnityEngine;
 public class GoombaController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rigid;
+    [SerializeField] Collider2D col;
     [SerializeField] float movePower;
     [SerializeField] float maxMoveSpeed;
     [SerializeField] bool live;
@@ -13,7 +14,7 @@ public class GoombaController : MonoBehaviour
 
     [SerializeField] AudioClip sfx;
 
-    private WaitForSeconds delay = new WaitForSeconds(0.5f);
+    private WaitForSeconds delay = new WaitForSeconds(0.3f);
     // 캐싱
 
 
@@ -23,7 +24,7 @@ public class GoombaController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(live)
+        if (live)
         {
             rigid.AddForce(Vector2.left * movePower, ForceMode2D.Impulse);
 
@@ -38,7 +39,7 @@ public class GoombaController : MonoBehaviour
         }
         else
         {
-            rigid.velocity = Vector2.zero;
+            return;
         }
 
     }
@@ -57,7 +58,13 @@ public class GoombaController : MonoBehaviour
 
     private IEnumerator AnimPlay()
     {
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+        rigid.velocity = Vector2.zero;
+        rigid.gravityScale = 0;
+
         animator.Play("GoombaStepped");
+
+
         yield return delay;
         Destroy(gameObject);
     }
