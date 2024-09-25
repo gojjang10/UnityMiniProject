@@ -122,8 +122,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.44958764}
-  m_Size: {x: 0.87037194, y: 0.87037194}
+  m_Offset: {x: -0.0000000020191635, y: 0.48306215}
+  m_Size: {x: 0.87037206, y: 0.8034251}
   m_Direction: 1
 --- !u!50 &7875116967298135999
 Rigidbody2D:
@@ -145,7 +145,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &602582179494257014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,5 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigid: {fileID: 7875116967298135999}
-  movePower: 3
-  maxMoveSpeed: 3
+  movePower: 2
+  maxMoveSpeed: 2
+  animator: {fileID: 3015395074646744354}
+  sfx: {fileID: 8300000, guid: e9acda02a33ebd04e9a098e562deba3b, type: 3}

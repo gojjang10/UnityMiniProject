@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
     private bool gameEnded = false;
     private bool gameCleared = false;
 
@@ -51,7 +53,6 @@ public class GameManager : MonoBehaviour
         if(!gameCleared)
         {
             gameCleared = true;
-            
             Debug.Log("게임 클리어! 재시작하려면 'R'키를 입력하시오.");
         }
     }

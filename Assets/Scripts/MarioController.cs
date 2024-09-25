@@ -30,7 +30,7 @@ public class MarioController : MonoBehaviour
     [SerializeField] private bool isGrounded;
 
 
-    private float x;
+    [SerializeField] private float x;
 
 
     private void Awake()
