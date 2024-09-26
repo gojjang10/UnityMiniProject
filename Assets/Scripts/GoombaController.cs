@@ -6,18 +6,10 @@ public class GoombaController : Monster
 {
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] Collider2D col;
-    [SerializeField] float movePower;
-    [SerializeField] float maxMoveSpeed;
-    [SerializeField] bool live;
 
     [SerializeField] Animator animator;
 
     [SerializeField] AudioClip sfx;
-
-    private WaitForSeconds delay = new WaitForSeconds(0.5f);
-    // 캐싱
-
-
     private void Start()
     {
         live = true;

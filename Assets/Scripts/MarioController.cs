@@ -119,7 +119,6 @@ public class MarioController : MonoBehaviour
             {
                 gameOverCoroutine = StartCoroutine(GameOverAnim());
             }
-
         }
     }
 
@@ -141,15 +140,15 @@ public class MarioController : MonoBehaviour
         animator.Play("GameOver");
 
         GameManager.Instance.GameOver();
-        yield return delay;
+        yield return delay;                                             // 1초 딜레이
 
         onGameOver?.Invoke();                                           // 이벤트 사용
         
         rigid.isKinematic = false;                                      // 중력 false
-        rigid.AddForce(Vector2.up * 12, ForceMode2D.Impulse);           // 살짝 올라가는 연출
+        rigid.AddForce(Vector2.up * 12, ForceMode2D.Impulse);           // 살짝 올라갔다가 떨어지는 연출을 위한 AddForce
 
-        yield return delay;
-        yield return delay;
+        yield return delay;                                             // 1초 딜레이
+        yield return delay;                                             // 1초 딜레이
 
         Destroy(gameObject);
     }

@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
         {
             RestartGame();
         }
-        
     }
 
     public void GameOver()
