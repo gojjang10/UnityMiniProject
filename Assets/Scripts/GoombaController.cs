@@ -54,11 +54,16 @@ public class GoombaController : MonoBehaviour
 
             StartCoroutine(AnimPlay());
         }
+        else
+        {
+
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("MainCamera") && live)
+            // 카메라의 콜라이더 범위 밖으로 사라지면 삭제
         {
             Destroy(gameObject);
         }
