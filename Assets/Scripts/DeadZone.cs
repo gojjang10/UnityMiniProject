@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
-    [SerializeField] private GameObject gameOverText;
+    public GameObject gameOverText;
     [SerializeField] AudioClip gameOver;
 
     private void Start()

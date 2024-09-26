@@ -15,6 +15,7 @@ public class GameScene : MonoBehaviour
         Time.timeScale = 0f;
 
         SoundManager.Instance.LoopBGM(true);
+        SoundManager.Instance.StopCurBGM();
         titleScreen.gameObject.SetActive(true);
         anykey.SetActive(true);
     }

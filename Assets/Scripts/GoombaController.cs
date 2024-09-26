@@ -24,7 +24,7 @@ public class GoombaController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (live)
+        if (live && !GameManager.Instance.gameEnded)
         {
             rigid.AddForce(Vector2.left * movePower, ForceMode2D.Impulse);
 
@@ -58,7 +58,7 @@ public class GoombaController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("MainCamera"))
+        if (collision.gameObject.CompareTag("MainCamera") && live)
         {
             Destroy(gameObject);
         }

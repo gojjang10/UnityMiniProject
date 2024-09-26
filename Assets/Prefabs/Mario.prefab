@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6054904185904563939}
   - component: {fileID: 6054904185904563967}
   - component: {fileID: 6054904185904563966}
-  - component: {fileID: 6054904185904563961}
   - component: {fileID: 6054904185904563964}
   m_Layer: 0
   m_Name: Mario
@@ -33,7 +32,8 @@ Transform:
   m_LocalPosition: {x: -8.57, y: -5.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9112071569720729911}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -144,25 +144,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.47642756}
-  m_Size: {x: 0.7789453, y: 0.9221449}
+  m_Offset: {x: -0.0057063103, y: 0.47642756}
+  m_Size: {x: 0.74470997, y: 0.9221449}
   m_Direction: 0
---- !u!70 &6054904185904563961
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6054904185904563936}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 7616afd4c2e061f40897f7826f55cb1d, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0032139474, y: 0.45910746}
-  m_Size: {x: 0.9350859, y: 0.8410866}
-  m_Direction: 1
 --- !u!114 &6054904185904563964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,3 +170,52 @@ MonoBehaviour:
   maxMoveSpeed: 5
   maxFallSpeed: 20
   isGrounded: 0
+  gameOver: {fileID: 8300000, guid: 54b26ed14c6eeda4c857d9ca9723f3fd, type: 3}
+--- !u!1 &7093321816308858003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9112071569720729911}
+  - component: {fileID: 6137016830791958232}
+  m_Layer: 0
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9112071569720729911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7093321816308858003}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6054904185904563965}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &6137016830791958232
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7093321816308858003}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 7616afd4c2e061f40897f7826f55cb1d, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0032139474, y: 0.45910746}
+  m_Size: {x: 0.9350859, y: 0.8410866}
+  m_Direction: 1

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MarioController : MonoBehaviour
@@ -18,6 +19,7 @@ public class MarioController : MonoBehaviour
     [Header("Physics")]
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] SpriteRenderer render;
+    [SerializeField] CapsuleCollider2D body;
 
     [Header("Animation")]
     [SerializeField] Animator animator;
@@ -29,8 +31,12 @@ public class MarioController : MonoBehaviour
     [SerializeField] private float maxFallSpeed;
     [SerializeField] private bool isGrounded;
 
+    [Header("Audio")]
+    [SerializeField] AudioClip gameOver;
 
-    [SerializeField] private float x;
+    private float x;
+    private WaitForSeconds delay = new WaitForSeconds(1f);
+    [SerializeField] GameObject gameOverText;
 
 
     private void Awake()
@@ -38,29 +44,36 @@ public class MarioController : MonoBehaviour
         states[(int)State.Idle] = idleState;
         states[(int)State.Walk] = walkState;
         states[(int)State.Jump] = jumpState;
+
+        rigid = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        render = GetComponent<SpriteRenderer>();
+
     }
 
 
     private void Start()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        render = GetComponent<SpriteRenderer>();
-
         states[(int)curState].Enter(this);
     }
 
     private void Update()
     {
-        GroundCheck();
-        x = Input.GetAxis("Horizontal");
-        
-        states[(int)curState].Update(this);
+        if (!GameManager.Instance.gameEnded)
+        {
+            GroundCheck();
+            x = Input.GetAxis("Horizontal");
+
+            states[(int)curState].Update(this);
+        }
     }
 
     private void FixedUpdate()
     {
-        states[(int)curState].FixedUpdate(this);
+        if (!GameManager.Instance.gameEnded)
+        {
+            states[(int)curState].FixedUpdate(this);
+        }
     }
 
     public void ChangeState(State nextState)
@@ -81,7 +94,7 @@ public class MarioController : MonoBehaviour
         if (hit.collider != null)
         {
             isGrounded = true;
-            Debug.Log("바닥에 있음");
+            //Debug.Log("바닥에 있음");
         }
         else
         {
@@ -89,6 +102,51 @@ public class MarioController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log($"{collision.gameObject.name} 충돌 확인");
+        if(collision.collider.CompareTag("Goomba") && transform.position.y < collision.transform.position.y + 0.1f)
+        {
+            Debug.Log("굼바 충돌 진입");
+            SoundManager.Instance.LoopBGM(false);
+            SoundManager.Instance.PlayBGM(gameOver);
+            GameManager.Instance.gameEnded = true;  // 이동불가 상태로 만들기
+            StartCoroutine(GameOverAnim());
+
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("GameOver"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private IEnumerator GameOverAnim()
+    {
+        rigid.velocity = Vector2.zero;
+
+        animator.Play("GameOver");
+
+        GameManager.Instance.GameOver();
+        yield return delay;
+
+        gameOverText.SetActive(true);
+        rigid.constraints = RigidbodyConstraints2D.FreezePositionX;     // X 위치 고정
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = false;   // 충돌체 비활성화
+        body.enabled = false;                                           // 충돌체 비활성화
+        rigid.AddForce(Vector2.up * 12, ForceMode2D.Impulse);           // 살짝 올라가는 연출
+
+        yield return delay;
+        yield return delay;
+
+        Destroy(gameObject);
+    }
+
+    #region
     [System.Serializable]
     public class BaseMarioState
     {
@@ -223,14 +281,7 @@ public class MarioController : MonoBehaviour
             }
         }
     }
-
-    private class GameOverState : BaseMarioState
-    {
-        public override void Enter(MarioController mario)
-        {
-            
-        }
-    }
+    #endregion
 
 
 }

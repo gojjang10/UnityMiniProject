@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    private bool gameEnded = false;
-    private bool gameCleared = false;
+    public bool gameEnded = false;
+    public bool gameCleared = false;
 
     private void Awake()
     {
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         if(!gameEnded)
         {
             gameEnded = true;
-            Time.timeScale = 0; // 게임 일시정지
+            //Time.timeScale = 0; // 게임 일시정지
 
             Debug.Log("게임 오버. 재시작하려면 'R'키를 입력하시오.");
         }

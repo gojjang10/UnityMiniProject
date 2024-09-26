@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 602582179494257014}
   m_Layer: 0
   m_Name: Goomba
-  m_TagString: Player
+  m_TagString: Goomba
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,7 +159,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigid: {fileID: 7875116967298135999}
+  col: {fileID: 0}
   movePower: 2
   maxMoveSpeed: 2
+  live: 0
   animator: {fileID: 3015395074646744354}
   sfx: {fileID: 8300000, guid: e9acda02a33ebd04e9a098e562deba3b, type: 3}

@@ -39,6 +39,14 @@ public class SoundManager : MonoBehaviour
         bgm.Stop();
     }
 
+    public void StopCurBGM()
+    {
+        if(bgm.isPlaying)
+        {
+            bgm.Stop();
+        }
+    }
+
     public void PauseBGM()
     {
         if (bgm.isPlaying == false)
