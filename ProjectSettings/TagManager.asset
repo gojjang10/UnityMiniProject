@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameOver
+  - SpawnSpot
+  - Goomba
   layers:
   - Default
   - TransparentFX

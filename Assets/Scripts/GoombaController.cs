@@ -14,7 +14,7 @@ public class GoombaController : MonoBehaviour
 
     [SerializeField] AudioClip sfx;
 
-    private WaitForSeconds delay = new WaitForSeconds(0.3f);
+    private WaitForSeconds delay = new WaitForSeconds(0.5f);
     // 캐싱
 
 
@@ -53,6 +53,14 @@ public class GoombaController : MonoBehaviour
             live = false;
 
             StartCoroutine(AnimPlay());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("MainCamera"))
+        {
+            Destroy(gameObject);
         }
     }
 

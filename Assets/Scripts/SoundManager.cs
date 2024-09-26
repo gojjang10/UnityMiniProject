@@ -46,16 +46,9 @@ public class SoundManager : MonoBehaviour
         bgm.Pause();
     }
 
-    public void LoopBGM()
+    public void LoopBGM(bool loop)
     {
-        if(bgm.loop == false)
-        {
-            bgm.loop = true;
-        }
-        else
-        {
-            bgm.loop = false;
-        }
+        bgm.loop = loop;
     }
 
     public void SetBGM(float volume, float pitch = 1f)

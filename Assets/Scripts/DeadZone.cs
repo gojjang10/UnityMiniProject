@@ -16,7 +16,7 @@ public class DeadZone : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            SoundManager.Instance.LoopBGM();
+            SoundManager.Instance.LoopBGM(false);
             SoundManager.Instance.PlayBGM(gameOver);
             
             gameOverText.SetActive(true);

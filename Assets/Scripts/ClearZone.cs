@@ -16,7 +16,7 @@ public class ClearZone : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SoundManager.Instance.LoopBGM();
+            SoundManager.Instance.LoopBGM(false);
             SoundManager.Instance.PlayBGM(bgm);
             
             gameClearText.SetActive(true);
