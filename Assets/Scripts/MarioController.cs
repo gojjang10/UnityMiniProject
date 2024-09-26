@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MarioController : MonoBehaviour
 {
@@ -36,7 +37,8 @@ public class MarioController : MonoBehaviour
 
     private float x;
     private WaitForSeconds delay = new WaitForSeconds(1f);
-    [SerializeField] GameObject gameOverText;
+    private Coroutine gameOverCoroutine;
+    public UnityEvent onGameOver;
 
 
     private void Awake()
@@ -49,8 +51,8 @@ public class MarioController : MonoBehaviour
         animator = GetComponent<Animator>();
         render = GetComponent<SpriteRenderer>();
 
+        gameOverCoroutine = null;
     }
-
 
     private void Start()
     {
@@ -105,16 +107,20 @@ public class MarioController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log($"{collision.gameObject.name} 충돌 확인");
-        if(collision.collider.CompareTag("Goomba") && transform.position.y < collision.transform.position.y + 0.1f)
+        if(collision.collider.CompareTag("Goomba") && transform.position.y < collision.transform.position.y + 0.3f)
         {
             Debug.Log("굼바 충돌 진입");
             SoundManager.Instance.LoopBGM(false);
             SoundManager.Instance.PlayBGM(gameOver);
             GameManager.Instance.gameEnded = true;  // 이동불가 상태로 만들기
-            StartCoroutine(GameOverAnim());
+            
+            if(gameOverCoroutine == null)
+                // 코루틴 두 번 실행되지 못하게 예외처리
+            {
+                gameOverCoroutine = StartCoroutine(GameOverAnim());
+            }
 
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -128,16 +134,18 @@ public class MarioController : MonoBehaviour
     private IEnumerator GameOverAnim()
     {
         rigid.velocity = Vector2.zero;
-
+  
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = false;   // 충돌체 비활성화
+        body.enabled = false;                                           // 충돌체 비활성화
+        rigid.isKinematic = true;                                       // 중력 true
         animator.Play("GameOver");
 
         GameManager.Instance.GameOver();
         yield return delay;
 
-        gameOverText.SetActive(true);
-        rigid.constraints = RigidbodyConstraints2D.FreezePositionX;     // X 위치 고정
-        gameObject.GetComponent<CapsuleCollider2D>().enabled = false;   // 충돌체 비활성화
-        body.enabled = false;                                           // 충돌체 비활성화
+        onGameOver?.Invoke();                                           // 이벤트 사용
+        
+        rigid.isKinematic = false;                                      // 중력 false
         rigid.AddForce(Vector2.up * 12, ForceMode2D.Impulse);           // 살짝 올라가는 연출
 
         yield return delay;

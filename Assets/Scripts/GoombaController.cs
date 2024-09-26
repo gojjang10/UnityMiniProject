@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoombaController : MonoBehaviour
+public class GoombaController : Monster
 {
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] Collider2D col;

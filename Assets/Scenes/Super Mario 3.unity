@@ -414,7 +414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &363587289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3578,7 +3578,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 22
-      m_TileSpriteIndex: 22
+      m_TileSpriteIndex: 43
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -4165,8 +4165,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 550411051, guid: 1ca651ccb15efe446a1236191cac1ee6, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 4
     m_Data: {fileID: -1629202930, guid: b4eb7adae9c36d045bff48fed870b0b5, type: 3}
   - m_RefCount: 19
@@ -4207,8 +4207,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 550411051, guid: 1ca651ccb15efe446a1236191cac1ee6, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -280575944, guid: 1ca651ccb15efe446a1236191cac1ee6, type: 3}
   - m_RefCount: 3
@@ -5028,6 +5028,7 @@ GameObject:
   - component: {fileID: 1216689470}
   - component: {fileID: 1216689472}
   - component: {fileID: 1216689471}
+  - component: {fileID: 1216689473}
   m_Layer: 5
   m_Name: GameOverText
   m_TagString: Untagged
@@ -5155,6 +5156,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216689469}
   m_CullTransparentMesh: 1
+--- !u!114 &1216689473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216689469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7953de80fac2947b58314409c63847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1223800041
 GameObject:
   m_ObjectHideFlags: 0
@@ -10788,6 +10801,42 @@ PrefabInstance:
       propertyPath: gameOverText
       value: 
       objectReference: {fileID: 1216689469}
+    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1216689473}
+    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GameOverUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIcontroller, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6054904185904563965, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -10831,6 +10880,10 @@ PrefabInstance:
     - target: {fileID: 6054904185904563965, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054904185904563967, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
+      propertyPath: m_GravityScale
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
