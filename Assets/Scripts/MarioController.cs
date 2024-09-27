@@ -64,7 +64,7 @@ public class MarioController : MonoBehaviour
 
     private void Start()
     {
-        states[(int)curState].Enter(this);
+        states[(int)curState].Enter();
     }
 
     private void Update()
@@ -74,7 +74,7 @@ public class MarioController : MonoBehaviour
             GroundCheck();
             x = Input.GetAxis("Horizontal");
 
-            states[(int)curState].Update(this);
+            states[(int)curState].Update();
         }
     }
 
@@ -82,15 +82,15 @@ public class MarioController : MonoBehaviour
     {
         if (!GameManager.Instance.gameEnded)
         {
-            states[(int)curState].FixedUpdate(this);
+            states[(int)curState].FixedUpdate();
         }
     }
 
     public void ChangeState(State nextState)
     {
-        states[(int)curState].Exit(this);
+        states[(int)curState].Exit();
         curState = nextState;
-        states[(int)curState].Enter(this);
+        states[(int)curState].Enter();
     }
 
 
@@ -176,22 +176,23 @@ public class MarioController : MonoBehaviour
     [System.Serializable]
     public class BaseMarioState
     {
-        public virtual void Enter(MarioController mario) { }
-        public virtual void Update(MarioController mario) { }
-        public virtual void FixedUpdate(MarioController mario) { }
-        public virtual void Exit(MarioController mario) { }
+        public virtual void Enter() { }
+        public virtual void Update() { }
+        public virtual void FixedUpdate() { }
+        public virtual void Exit() { }
     }
 
     [System.Serializable]
     private class IdleState : BaseMarioState
     {
-        public override void Enter(MarioController mario)
+        [SerializeField] MarioController mario;
+        public override void Enter()
         {
             mario.animator.Play("Idle");
             Debug.Log("Idle 돌입");
         }
 
-        public override void Update(MarioController mario)
+        public override void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space) && mario.isGrounded)
             {
@@ -207,13 +208,13 @@ public class MarioController : MonoBehaviour
     [System.Serializable]
     private class WalkState : BaseMarioState
     {
-
-        public override void Enter(MarioController mario)
+        [SerializeField] MarioController mario;
+        public override void Enter()
         {
             mario.animator.Play("Walk");
             Debug.Log("Walk 돌입");
         }
-        public override void FixedUpdate(MarioController mario)
+        public override void FixedUpdate()
         {
             mario.rigid.AddForce(Vector2.right * mario.x * mario.movePower, ForceMode2D.Impulse);
 
@@ -237,7 +238,7 @@ public class MarioController : MonoBehaviour
             }
         }
 
-        public override void Update(MarioController mario)
+        public override void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space) && mario.isGrounded)
             {
@@ -253,10 +254,11 @@ public class MarioController : MonoBehaviour
     [System.Serializable]
     private class JumpState : BaseMarioState
     {
+        [SerializeField] MarioController mario;
         [SerializeField] AudioClip jump;
         [SerializeField] float jumpPower;
 
-        public override void Enter(MarioController mario)
+        public override void Enter()
         {
             mario.rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             Debug.Log("점프 진입");
@@ -268,7 +270,7 @@ public class MarioController : MonoBehaviour
 
         }
 
-        public override void Update(MarioController mario)
+        public override void Update()
         {
 
             if (mario.isGrounded && mario.rigid.velocity.y <= 0)
@@ -277,7 +279,7 @@ public class MarioController : MonoBehaviour
             }
         }
 
-        public override void FixedUpdate(MarioController mario)
+        public override void FixedUpdate()
         {
 
             mario.rigid.AddForce(Vector2.right * mario.x * mario.movePower, ForceMode2D.Impulse);

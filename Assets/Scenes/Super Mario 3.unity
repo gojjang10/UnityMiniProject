@@ -755,7 +755,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0.0000000037206656, y: -2.291271e-10, z: -8.525053e-19, w: 1}
-  m_LocalPosition: {x: 2.4018302, y: -0.1315403, z: -10}
+  m_LocalPosition: {x: 2.41882, y: -0.13153028, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -981,11 +981,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!70 &957260452 stripped
-CapsuleCollider2D:
-  m_CorrespondingSourceObject: {fileID: 6137016830791958232, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-  m_PrefabInstance: {fileID: 6054904184517510253}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &992403108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2914122477256583895, guid: 9f005a9989ccd464c82f76f860408404, type: 3}
@@ -6137,53 +6132,9 @@ PrefabInstance:
       value: Mario
       objectReference: {fileID: 0}
     - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-      propertyPath: body
-      value: 
-      objectReference: {fileID: 957260452}
-    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-      propertyPath: bigMario
-      value: 
-      objectReference: {fileID: 3951946370318361319, guid: 9c544f0fbcf1f5b40bd667d252450e2a, type: 3}
-    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-      propertyPath: gameOverText
-      value: 
-      objectReference: {fileID: 1216689469}
-    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
       propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1216689473}
-    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GameOverUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIcontroller, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6054904185904563964, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 6054904185904563965, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6227,10 +6178,6 @@ PrefabInstance:
     - target: {fileID: 6054904185904563965, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6054904185904563967, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-      propertyPath: m_GravityScale
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}

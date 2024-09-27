@@ -36,7 +36,7 @@ public class BigMarioController : MonoBehaviour
     [SerializeField] AudioClip gameOver;
 
     [Header("Prefab")]
-    [SerializeField] GameObject bigMario;
+    //[SerializeField] GameObject bigMario;
 
     private float x;                                            // X 축 입력을 위한 변수
     private WaitForSeconds delay = new WaitForSeconds(1f);      // 코루틴 캐싱
@@ -61,7 +61,7 @@ public class BigMarioController : MonoBehaviour
 
     private void Start()
     {
-        states[(int)curState].Enter(this);
+        states[(int)curState].Enter();
     }
 
     private void Update()
@@ -71,7 +71,7 @@ public class BigMarioController : MonoBehaviour
             GroundCheck();
             x = Input.GetAxis("Horizontal");
 
-            states[(int)curState].Update(this);
+            states[(int)curState].Update();
         }
     }
 
@@ -79,15 +79,15 @@ public class BigMarioController : MonoBehaviour
     {
         if (!GameManager.Instance.gameEnded)
         {
-            states[(int)curState].FixedUpdate(this);
+            states[(int)curState].FixedUpdate();
         }
     }
 
     public void ChangeState(State nextState)
     {
-        states[(int)curState].Exit(this);
+        states[(int)curState].Exit();
         curState = nextState;
-        states[(int)curState].Enter(this);
+        states[(int)curState].Enter();
     }
 
 
@@ -129,13 +129,13 @@ public class BigMarioController : MonoBehaviour
             }
         }
 
-        else if (collision.collider.CompareTag("Mushroom"))
-        {
-            powerUp = true;
-            Instantiate(bigMario, transform.position, Quaternion.identity);
-            Debug.Log("BigMario 생성");
-            Destroy(gameObject);
-        }
+        //else if (collision.collider.CompareTag("Mushroom"))
+        //{
+        //    powerUp = true;
+        //    Instantiate(bigMario, transform.position, Quaternion.identity);
+        //    Debug.Log("BigMario 생성");
+        //    Destroy(gameObject);
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -173,22 +173,23 @@ public class BigMarioController : MonoBehaviour
     [System.Serializable]
     public class BaseMarioState
     {
-        public virtual void Enter(MarioController mario) { }
-        public virtual void Update(MarioController mario) { }
-        public virtual void FixedUpdate(MarioController mario) { }
-        public virtual void Exit(MarioController mario) { }
+        public virtual void Enter() { }
+        public virtual void Update() { }
+        public virtual void FixedUpdate() { }
+        public virtual void Exit() { }
     }
 
     [System.Serializable]
     private class IdleState : BaseMarioState
     {
-        public override void Enter(MarioController mario)
+        [SerializeField] BigMarioController mario;
+        public override void Enter()
         {
-            mario.animator.Play("Idle");
+            mario.animator.Play("BigMarioIdle");
             Debug.Log("Idle 돌입");
         }
 
-        public override void Update(MarioController mario)
+        public override void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space) && mario.isGrounded)
             {
@@ -204,13 +205,13 @@ public class BigMarioController : MonoBehaviour
     [System.Serializable]
     private class WalkState : BaseMarioState
     {
-
-        public override void Enter(MarioController mario)
+        [SerializeField] BigMarioController mario;
+        public override void Enter()
         {
-            mario.animator.Play("Walk");
+            mario.animator.Play("BigMarioWalk");
             Debug.Log("Walk 돌입");
         }
-        public override void FixedUpdate(MarioController mario)
+        public override void FixedUpdate()
         {
             mario.rigid.AddForce(Vector2.right * mario.x * mario.movePower, ForceMode2D.Impulse);
 
@@ -234,7 +235,7 @@ public class BigMarioController : MonoBehaviour
             }
         }
 
-        public override void Update(MarioController mario)
+        public override void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space) && mario.isGrounded)
             {
@@ -250,22 +251,21 @@ public class BigMarioController : MonoBehaviour
     [System.Serializable]
     private class JumpState : BaseMarioState
     {
+        [SerializeField] BigMarioController mario;
         [SerializeField] AudioClip jump;
         [SerializeField] float jumpPower;
 
-        public override void Enter(MarioController mario)
+        public override void Enter()
         {
             mario.rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             Debug.Log("점프 진입");
 
-            mario.animator.Play("Jump");
+            mario.animator.Play("BigMarioJump");
             SoundManager.Instance.PlaySFX(jump);
-
-
 
         }
 
-        public override void Update(MarioController mario)
+        public override void Update()
         {
 
             if (mario.isGrounded && mario.rigid.velocity.y <= 0)
@@ -274,7 +274,7 @@ public class BigMarioController : MonoBehaviour
             }
         }
 
-        public override void FixedUpdate(MarioController mario)
+        public override void FixedUpdate()
         {
 
             mario.rigid.AddForce(Vector2.right * mario.x * mario.movePower, ForceMode2D.Impulse);
@@ -305,4 +305,5 @@ public class BigMarioController : MonoBehaviour
         }
     }
     #endregion
+
 }
