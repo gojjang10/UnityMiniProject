@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8902140128128692467}
   - component: {fileID: 275702176}
   - component: {fileID: 8050752085957908595}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Question mark Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,6 +162,9 @@ MonoBehaviour:
   animator: {fileID: 461593267534937670}
   hitSound: {fileID: 8300000, guid: 381a6cc4776a4c44cba7e8ab77a4546b, type: 3}
   height: 0.9
+  slots:
+  - mariostate: 0
+    Item: {fileID: 62017579172113911, guid: d8347c790e6a1b1449e1f0e386c51a98, type: 3}
 --- !u!61 &8050752085957908595
 BoxCollider2D:
   m_ObjectHideFlags: 0

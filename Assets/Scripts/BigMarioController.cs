@@ -1,15 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum MarioType { Small, Big };
-
-public class MarioController : MonoBehaviour
+public class BigMarioController : MonoBehaviour
 {
     public enum State { Idle, Walk, Jump, Size }
-   
+
 
     [Header("State")]
     [SerializeField] private State curState = State.Idle;
@@ -117,22 +114,22 @@ public class MarioController : MonoBehaviour
         if (powerUp) return;                                // 충돌 무시
 
         Debug.Log($"{collision.gameObject.name} 충돌 확인");
-        if(collision.collider.CompareTag("Goomba") && transform.position.y < collision.transform.position.y + 0.3f)
-            // 굼바에게 부딪혔을때 상황
+        if (collision.collider.CompareTag("Goomba") && transform.position.y < collision.transform.position.y + 0.3f)
+        // 굼바에게 부딪혔을때 상황
         {
             Debug.Log("굼바 충돌 진입");
             SoundManager.Instance.LoopBGM(false);
             SoundManager.Instance.PlayBGM(gameOver);
             GameManager.Instance.gameEnded = true;  // 이동불가 상태로 만들기
-            
-            if(gameOverCoroutine == null)
-                // 코루틴 두 번 실행되지 못하게 예외처리
+
+            if (gameOverCoroutine == null)
+            // 코루틴 두 번 실행되지 못하게 예외처리
             {
                 gameOverCoroutine = StartCoroutine(GameOverAnim());
             }
         }
 
-        else if(collision.collider.CompareTag("Mushroom"))
+        else if (collision.collider.CompareTag("Mushroom"))
         {
             powerUp = true;
             Instantiate(bigMario, transform.position, Quaternion.identity);
@@ -152,7 +149,7 @@ public class MarioController : MonoBehaviour
     private IEnumerator GameOverAnim()
     {
         rigid.velocity = Vector2.zero;
-  
+
         gameObject.GetComponent<CapsuleCollider2D>().enabled = false;   // 충돌체 비활성화
         body.enabled = false;                                           // 충돌체 비활성화
         rigid.isKinematic = true;                                       // 중력 true
@@ -162,7 +159,7 @@ public class MarioController : MonoBehaviour
         yield return delay;                                             // 1초 딜레이
 
         onGameOver?.Invoke();                                           // 이벤트 사용
-        
+
         rigid.isKinematic = false;                                      // 중력 false
         rigid.AddForce(Vector2.up * 20, ForceMode2D.Impulse);           // 살짝 올라갔다가 떨어지는 연출을 위한 AddForce
 
@@ -308,7 +305,4 @@ public class MarioController : MonoBehaviour
         }
     }
     #endregion
-
-
 }
-
