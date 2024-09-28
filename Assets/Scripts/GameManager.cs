@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     public bool gameEnded = false;
     public bool gameCleared = false;
+    public CinemachineVirtualCamera marioCam;
 
     private void Awake()
     {

@@ -1,3 +1,5 @@
+using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -46,6 +48,9 @@ public class MarioController : MonoBehaviour
     private Coroutine gameOverCoroutine;                        // 코루틴 변수
     public UnityEvent onGameOver;                               // 게임오버를 알리는 이벤트
     public MarioType curMarioType;                              // 마리오의 현재 타입
+
+    [SerializeField] UIcontroller UIcontroller;
+
     private bool powerUp = false;
 
     private void Awake()
@@ -60,12 +65,26 @@ public class MarioController : MonoBehaviour
 
         gameOverCoroutine = null;
         curMarioType = MarioType.Small;
+
+        UIcontroller = GameObject.Find("GameOverText").GetComponent<UIcontroller>();
+        
     }
 
     private void Start()
     {
+        if (GameManager.Instance.marioCam == null)
+        {
+            GameManager.Instance.marioCam = GameObject.Find("MarioCam").GetComponent<CinemachineVirtualCamera>();
+        }
+
+        if (GameManager.Instance.marioCam != null)
+        {
+            GameManager.Instance.marioCam.Follow = transform;
+        }
         states[(int)curState].Enter();
+        onGameOver.AddListener(UIcontroller.GameOverUI);
     }
+
 
     private void Update()
     {
@@ -161,7 +180,8 @@ public class MarioController : MonoBehaviour
         GameManager.Instance.GameOver();
         yield return delay;                                             // 1초 딜레이
 
-        onGameOver?.Invoke();                                           // 이벤트 사용
+        //onGameOver?.Invoke();                                           // 이벤트 사용
+        onGameOver?.Invoke();
         
         rigid.isKinematic = false;                                      // 중력 false
         rigid.AddForce(Vector2.up * 20, ForceMode2D.Impulse);           // 살짝 올라갔다가 떨어지는 연출을 위한 AddForce
@@ -265,8 +285,6 @@ public class MarioController : MonoBehaviour
 
             mario.animator.Play("Jump");
             SoundManager.Instance.PlaySFX(jump);
-
-
 
         }
 

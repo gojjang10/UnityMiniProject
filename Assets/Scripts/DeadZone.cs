@@ -1,16 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
-    public GameObject gameOverText;
     [SerializeField] AudioClip gameOver;
-
-    private void Start()
-    {
-        gameOverText.SetActive(false);
-    }
+    [SerializeField] TextMeshProUGUI gameOverText;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,7 +15,7 @@ public class DeadZone : MonoBehaviour
             SoundManager.Instance.LoopBGM(false);
             SoundManager.Instance.PlayBGM(gameOver);
             
-            gameOverText.SetActive(true);
+            gameOverText.enabled = true;
             GameManager.Instance.GameOver();
                 
         }

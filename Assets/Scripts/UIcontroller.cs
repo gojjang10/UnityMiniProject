@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIcontroller : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI gameOverText;
+    private void Start()
+    {
+        gameOverText.enabled = false;
+    }
+
     public void GameOverUI()
     {
-        gameObject.SetActive(true);
+        gameOverText.enabled = true;
     }
 
 }

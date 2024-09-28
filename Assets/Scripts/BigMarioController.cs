@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,16 +35,19 @@ public class BigMarioController : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] AudioClip gameOver;
+    [SerializeField] AudioClip levelUp;
 
     [Header("Prefab")]
-    //[SerializeField] GameObject bigMario;
+    [SerializeField] GameObject smallMario;
 
     private float x;                                            // X 축 입력을 위한 변수
     private WaitForSeconds delay = new WaitForSeconds(1f);      // 코루틴 캐싱
     private Coroutine gameOverCoroutine;                        // 코루틴 변수
     public UnityEvent onGameOver;                               // 게임오버를 알리는 이벤트
     public MarioType curMarioType;                              // 마리오의 현재 타입
-    private bool powerUp = false;
+    private bool powerDown = false;
+
+    private UIcontroller UIcontroller;
 
     private void Awake()
     {
@@ -56,12 +60,25 @@ public class BigMarioController : MonoBehaviour
         render = GetComponent<SpriteRenderer>();
 
         gameOverCoroutine = null;
-        curMarioType = MarioType.Small;
+        curMarioType = MarioType.Big;
+        UIcontroller = GameObject.Find("GameOverText").GetComponent<UIcontroller>();
     }
 
     private void Start()
     {
+        if (GameManager.Instance.marioCam == null)
+        {
+            GameManager.Instance.marioCam = GameObject.Find("MarioCam").GetComponent<CinemachineVirtualCamera>();
+        }
+        
+        if(GameManager.Instance.marioCam != null)
+        {
+            GameManager.Instance.marioCam.Follow = transform;
+        }
         states[(int)curState].Enter();
+        SoundManager.Instance.PlaySFX(levelUp);
+        onGameOver.AddListener(UIcontroller.GameOverUI);
+
     }
 
     private void Update()
@@ -111,22 +128,17 @@ public class BigMarioController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (powerUp) return;                                // 충돌 무시
+        if (powerDown) return;                                // 충돌 무시
 
         Debug.Log($"{collision.gameObject.name} 충돌 확인");
         if (collision.collider.CompareTag("Goomba") && transform.position.y < collision.transform.position.y + 0.3f)
         // 굼바에게 부딪혔을때 상황
         {
+            powerDown = true;
             Debug.Log("굼바 충돌 진입");
-            SoundManager.Instance.LoopBGM(false);
-            SoundManager.Instance.PlayBGM(gameOver);
-            GameManager.Instance.gameEnded = true;  // 이동불가 상태로 만들기
+            Instantiate(smallMario, transform.position, Quaternion.identity);
+            Destroy(gameObject);
 
-            if (gameOverCoroutine == null)
-            // 코루틴 두 번 실행되지 못하게 예외처리
-            {
-                gameOverCoroutine = StartCoroutine(GameOverAnim());
-            }
         }
 
         //else if (collision.collider.CompareTag("Mushroom"))
