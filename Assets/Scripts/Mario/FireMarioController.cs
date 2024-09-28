@@ -6,7 +6,6 @@ using UnityEngine;
 public class FireMarioController : MarioBassController
 {
     [SerializeField] protected GameObject smallMario;
-    [SerializeField] protected GameObject fireMario;
     [SerializeField] protected AudioClip levelUp;
     
     
@@ -25,6 +24,8 @@ public class FireMarioController : MarioBassController
         gameOverCoroutine = null;
         curMarioType = MarioType.Fire;
         UIcontroller = GameObject.Find("GameOverText").GetComponent<UIcontroller>();
+        powerUp = false;
+        powerDown = false;
     }
 
     private void Start()

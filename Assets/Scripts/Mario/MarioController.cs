@@ -23,6 +23,8 @@ public class MarioController : MarioBassController
 
         gameOverCoroutine = null;
         curMarioType = MarioType.Small;
+        powerUp = false;
+        powerDown = false;
 
         UIcontroller = GameObject.Find("GameOverText").GetComponent<UIcontroller>();
         
