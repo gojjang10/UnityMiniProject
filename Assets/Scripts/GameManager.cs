@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     public bool gameEnded = false;
     public bool gameCleared = false;
+    public bool playerDamaged = false;
     public CinemachineVirtualCamera marioCam;
 
     private void Awake()

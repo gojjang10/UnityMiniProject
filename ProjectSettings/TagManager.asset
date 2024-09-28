@@ -9,17 +9,18 @@ TagManager:
   - Goomba
   - Mushroom
   - virtualCamera
+  - Flower
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - Ground
   - Item
   - Box
-  - 
+  - PlayerDamaged
   - 
   - 
   - 

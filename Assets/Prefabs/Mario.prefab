@@ -194,6 +194,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   curMarioType: 0
+  UIcontroller: {fileID: 0}
 --- !u!1 &7093321816308858003
 GameObject:
   m_ObjectHideFlags: 0
