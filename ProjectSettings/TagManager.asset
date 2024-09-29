@@ -10,6 +10,7 @@ TagManager:
   - Mushroom
   - virtualCamera
   - Flower
+  - FireBall
   layers:
   - Default
   - TransparentFX

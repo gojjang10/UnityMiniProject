@@ -40,15 +40,19 @@ public class GoombaController : Monster
     {
         Debug.Log($"{collision.gameObject.name} 충돌 확인");
         if(collision.collider.CompareTag("Player") && collision.transform.position.y > transform.position.y + 0.1f)
+            // 마리오가 밟았을때
         {
             SoundManager.Instance.PlaySFX(sfx);
             live = false;
 
             StartCoroutine(AnimPlay());
         }
-        else
+        
+        if(collision.collider.CompareTag("FireBall"))
+            // 파이어볼에 맞았을때
         {
-
+            live = false;
+            StartCoroutine(HitFireBall());
         }
     }
 
@@ -69,9 +73,26 @@ public class GoombaController : Monster
 
         animator.Play("GoombaStepped");
 
-
         yield return delay;
         Destroy(gameObject);
     }
 
+    private IEnumerator HitFireBall()
+    {
+        Debug.Log("굼바 처치");
+        rigid.velocity = Vector2.zero;
+        col.enabled = false;
+        
+        rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+
+        yield return delay;
+        yield return delay;
+        yield return delay;
+        yield return delay;
+        yield return delay;
+        yield return delay;
+
+        Destroy (gameObject);
+        
+    }
 }
