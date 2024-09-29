@@ -9,6 +9,8 @@ public class FireMarioController : MarioBassController
     [SerializeField] protected AudioClip levelUp;
 
     [SerializeField] private FireState fireState;
+
+    [SerializeField] Transform muzzlePoint;
     
 
     private void Awake()
@@ -52,6 +54,16 @@ public class FireMarioController : MarioBassController
         {
             GroundCheck();
             x = Input.GetAxis("Horizontal");
+
+            if(render.flipX)
+            {
+                muzzlePoint.localPosition = new Vector3(-Mathf.Abs(muzzlePoint.localPosition.x), muzzlePoint.localPosition.y, muzzlePoint.localPosition.z);
+            }
+            else
+            {
+                muzzlePoint.localPosition = new Vector3(Mathf.Abs(muzzlePoint.localPosition.x), muzzlePoint.localPosition.y, muzzlePoint.localPosition.z);
+            }
+
 
             states[(int)curState].Update();
         }

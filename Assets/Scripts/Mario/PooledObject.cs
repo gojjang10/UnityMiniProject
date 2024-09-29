@@ -23,8 +23,12 @@ public class PooledObject : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        returnPool.ReturnPool(this);
+        if (collision.gameObject.layer == 3)
+        {
+            returnPool.ReturnPool(this);
+        }
+       
     }
 }

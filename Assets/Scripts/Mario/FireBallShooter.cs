@@ -26,7 +26,8 @@ public class FireBallShooter : MonoBehaviour
         FireBall fireBall = instance.gameObject.AddComponent<FireBall>();
         if(fireBall != null)
         {
-            fireBall.SetSpeed(fireBallSpeed * muzzlePoint.forward);
+            Vector2 dir = GetComponent<SpriteRenderer>().flipX ? Vector2.left : Vector2.right;
+            fireBall.SetSpeed(fireBallSpeed * dir);
         }
 
     }
