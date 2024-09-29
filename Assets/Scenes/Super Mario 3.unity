@@ -122,63 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &11626929
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5735071706738478296, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
-      propertyPath: m_Name
-      value: FireMario
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.91
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
 --- !u!1 &37896374
 GameObject:
   m_ObjectHideFlags: 0
@@ -3701,6 +3644,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOver: {fileID: 8300000, guid: 54b26ed14c6eeda4c857d9ca9723f3fd, type: 3}
   gameOverText: {fileID: 1216689471}
+--- !u!1001 &1816512793
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5735071706738478296, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+      propertyPath: m_Name
+      value: FireMario
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.0226192
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.792271
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735071706738478300, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
 --- !u!1 &1888966803
 GameObject:
   m_ObjectHideFlags: 0
@@ -6158,6 +6158,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3015395074646744352, guid: afb73cacf142b6c468d9969d17e480d2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3015395074646744355, guid: afb73cacf142b6c468d9969d17e480d2, type: 3}
+      propertyPath: m_FlipY
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3015395074646744365, guid: afb73cacf142b6c468d9969d17e480d2, type: 3}

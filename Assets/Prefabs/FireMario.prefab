@@ -284,6 +284,7 @@ MonoBehaviour:
   fireBallPool: {fileID: 7813592877671826404}
   muzzlePoint: {fileID: 8257265927476914993}
   fireBallSpeed: 10
+  fire: {fileID: 8300000, guid: 151878880aacdaa49829f317f5a2178f, type: 3}
 --- !u!114 &7813592877671826404
 MonoBehaviour:
   m_ObjectHideFlags: 0

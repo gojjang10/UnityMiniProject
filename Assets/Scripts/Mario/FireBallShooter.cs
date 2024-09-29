@@ -7,11 +7,13 @@ public class FireBallShooter : MonoBehaviour
     [SerializeField] ObjectPool fireBallPool;
     [SerializeField] Transform muzzlePoint;
     [SerializeField] float fireBallSpeed;
+    [SerializeField] AudioClip fire;
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.X))
         {
+            SoundManager.Instance.PlaySFX(fire);
             Fire();
         }
     }

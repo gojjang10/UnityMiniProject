@@ -5,7 +5,7 @@ using UnityEngine;
 public class PooledObject : MonoBehaviour
 {
     public ObjectPool returnPool;
-    private float returnTime = 10;
+    private float returnTime = 5;
 
     private float curTime;
 

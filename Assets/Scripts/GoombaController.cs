@@ -9,7 +9,8 @@ public class GoombaController : Monster
 
     [SerializeField] Animator animator;
 
-    [SerializeField] AudioClip sfx;
+    [SerializeField] AudioClip hitSFX;
+    [SerializeField] AudioClip steppedSfx;
     private void Start()
     {
         live = true;
@@ -42,7 +43,7 @@ public class GoombaController : Monster
         if(collision.collider.CompareTag("Player") && collision.transform.position.y > transform.position.y + 0.1f)
             // 마리오가 밟았을때
         {
-            SoundManager.Instance.PlaySFX(sfx);
+            SoundManager.Instance.PlaySFX(steppedSfx);
             live = false;
 
             StartCoroutine(AnimPlay());
@@ -51,6 +52,7 @@ public class GoombaController : Monster
         if(collision.collider.CompareTag("FireBall"))
             // 파이어볼에 맞았을때
         {
+            SoundManager.Instance.PlaySFX(hitSFX);
             live = false;
             StartCoroutine(HitFireBall());
         }
@@ -82,6 +84,9 @@ public class GoombaController : Monster
         Debug.Log("굼바 처치");
         rigid.velocity = Vector2.zero;
         col.enabled = false;
+        SpriteRenderer render = GetComponent<SpriteRenderer>();
+        render.flipY = true;
+        transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         
         rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
 

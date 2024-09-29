@@ -162,8 +162,8 @@ MonoBehaviour:
   speed: 3
   bounceForce: 5
   rb: {fileID: 8366712573957320827}
-  velocity: {x: 10, y: -10}
-  attack: 1
+  velocity: {x: 0, y: 0}
+  fire: {fileID: 8300000, guid: 151878880aacdaa49829f317f5a2178f, type: 3}
 --- !u!114 &276909208600241845
 MonoBehaviour:
   m_ObjectHideFlags: 0

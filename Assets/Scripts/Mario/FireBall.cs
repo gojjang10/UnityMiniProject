@@ -9,7 +9,7 @@ public class FireBall : MonoBehaviour
     [SerializeField] float bounceForce;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Vector2 velocity;
-    public float attack;
+    
 
     private float lastGround;
 

@@ -161,4 +161,5 @@ MonoBehaviour:
   rigid: {fileID: 7875116967298135999}
   col: {fileID: 1637475659}
   animator: {fileID: 3015395074646744354}
-  sfx: {fileID: 8300000, guid: e9acda02a33ebd04e9a098e562deba3b, type: 3}
+  hitSFX: {fileID: 8300000, guid: c5c3cb3332fdea043b086232b9d29871, type: 3}
+  steppedSfx: {fileID: 8300000, guid: e9acda02a33ebd04e9a098e562deba3b, type: 3}
