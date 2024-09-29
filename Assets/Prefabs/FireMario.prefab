@@ -48,6 +48,37 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.05607879}
   m_Size: {x: 0.9736328, y: 1.5475175}
   m_Direction: 0
+--- !u!1 &4148499488955086698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8257265927476914993}
+  m_Layer: 0
+  m_Name: MuzzlePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8257265927476914993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4148499488955086698}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.705, y: 0.72, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5735071706738478300}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5735071706738478296
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,6 +93,8 @@ GameObject:
   - component: {fileID: 5735071706738478299}
   - component: {fileID: 8741261603605875143}
   - component: {fileID: 8633205197426539875}
+  - component: {fileID: 1354737891785858984}
+  - component: {fileID: 7813592877671826404}
   m_Layer: 0
   m_Name: FireMario
   m_TagString: Player
@@ -82,6 +115,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6459989855633224052}
+  - {fileID: 8257265927476914993}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -232,3 +266,34 @@ MonoBehaviour:
   UIcontroller: {fileID: 0}
   smallMario: {fileID: 6054904185904563936, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
   levelUp: {fileID: 8300000, guid: 32768fbb4ff04ec4283f92b46b9fa780, type: 3}
+  fireState:
+    mario: {fileID: 0}
+--- !u!114 &1354737891785858984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5735071706738478296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd502d6f564a8e64687f916cfd8b91ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireBallPool: {fileID: 7813592877671826404}
+  muzzlePoint: {fileID: 8257265927476914993}
+  fireBallSpeed: 3
+--- !u!114 &7813592877671826404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5735071706738478296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a0051727b372e4d87186d7ee21f806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pool: []
+  prefab: {fileID: 276909208600241845, guid: beb31e68d8b20414e9f16977638c7692, type: 3}

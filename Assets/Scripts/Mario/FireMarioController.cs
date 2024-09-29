@@ -7,8 +7,8 @@ public class FireMarioController : MarioBassController
 {
     [SerializeField] protected GameObject smallMario;
     [SerializeField] protected AudioClip levelUp;
-    
-    
+
+    [SerializeField] private FireState fireState;
     
 
     private void Awake()
@@ -16,6 +16,7 @@ public class FireMarioController : MarioBassController
         states[(int)State.Idle] = idleState;
         states[(int)State.Walk] = walkState;
         states[(int)State.Jump] = jumpState;
+        states[(int)State.Fire] = fireState;
 
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -77,7 +78,6 @@ public class FireMarioController : MarioBassController
             Debug.Log("굼바 충돌 진입");
             Instantiate(smallMario, transform.position, Quaternion.identity);
             Destroy(gameObject);
-
         }
 
  
@@ -89,5 +89,18 @@ public class FireMarioController : MarioBassController
         {
             Destroy(gameObject);
         }
+    }
+
+    [System.Serializable]
+    private class FireState : BaseMarioState
+    {
+        [SerializeField] FireMarioController mario;
+
+        public override void Enter()
+        {
+            mario.animator.Play("Fire");
+            Debug.Log("Fire 발사");
+        }
+
     }
 }
