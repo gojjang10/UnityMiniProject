@@ -11,6 +11,8 @@ TagManager:
   - virtualCamera
   - Flower
   - FireBall
+  - Ground
+  - Box
   layers:
   - Default
   - TransparentFX

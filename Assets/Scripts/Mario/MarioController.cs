@@ -16,6 +16,8 @@ public class MarioController : MarioBassController
         states[(int)State.Idle] = idleState;
         states[(int)State.Walk] = walkState;
         states[(int)State.Jump] = jumpState;
+        states[(int)State.Run] = runState;
+        
 
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -54,24 +56,7 @@ public class MarioController : MarioBassController
         }
     }
 
-    private void Update()
-    {
-        if (!GameManager.Instance.gameEnded)
-        {
-            GroundCheck();
-            x = Input.GetAxis("Horizontal");
 
-            states[(int)curState].Update();
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (!GameManager.Instance.gameEnded)
-        {
-            states[(int)curState].FixedUpdate();
-        }
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

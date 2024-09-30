@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6732c20319465b244bad74259a3e44d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curMarioType: 0
   curState: 0
   idleState:
     mario: {fileID: 6054904185904563964}
@@ -168,33 +169,30 @@ MonoBehaviour:
     mario: {fileID: 6054904185904563964}
     jump: {fileID: 8300000, guid: 5102d1d1b71d7eb4f87be41d3eb7df13, type: 3}
     jumpPower: 17
+  runState:
+    mario: {fileID: 6054904185904563964}
   rigid: {fileID: 6054904185904563967}
   render: {fileID: 6054904185904563938}
   body: {fileID: 6137016830791958232}
-  animator: {fileID: 6054904185904563939}
-  movePower: 5
-  maxMoveSpeed: 5
+  acceleration: 20
+  deceleration: 10
+  currentSpeed: 0
+  maxSpeed: 5
   maxFallSpeed: 20
+  animator: {fileID: 6054904185904563939}
   isGrounded: 0
   gameOver: {fileID: 8300000, guid: 54b26ed14c6eeda4c857d9ca9723f3fd, type: 3}
-  bigMario: {fileID: 3951946370318361319, guid: 9c544f0fbcf1f5b40bd667d252450e2a, type: 3}
   onGameOver:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIcontroller, Assembly-CSharp
-        m_MethodName: GameOverUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  curMarioType: 0
+      m_Calls: []
   UIcontroller: {fileID: 0}
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
+  box:
+    serializedVersion: 2
+    m_Bits: 0
+  bigMario: {fileID: 3951946370318361319, guid: 9c544f0fbcf1f5b40bd667d252450e2a, type: 3}
 --- !u!1 &7093321816308858003
 GameObject:
   m_ObjectHideFlags: 0

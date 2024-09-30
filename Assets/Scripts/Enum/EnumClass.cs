@@ -4,4 +4,4 @@ using UnityEngine;
 
 
 public enum MarioType { Small, Big, Fire}
-public enum State { Idle, Walk, Jump, Fire, Size }
+public enum State { Idle, Walk, Run, Jump, Fire, Size }

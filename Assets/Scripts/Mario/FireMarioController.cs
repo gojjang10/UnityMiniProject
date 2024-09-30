@@ -18,6 +18,7 @@ public class FireMarioController : MarioBassController
         states[(int)State.Idle] = idleState;
         states[(int)State.Walk] = walkState;
         states[(int)State.Jump] = jumpState;
+        states[(int)State.Run] = runState;
         states[(int)State.Fire] = fireState;
 
         rigid = GetComponent<Rigidbody2D>();
@@ -53,9 +54,19 @@ public class FireMarioController : MarioBassController
         if (!GameManager.Instance.gameEnded)
         {
             GroundCheck();
-            x = Input.GetAxis("Horizontal");
 
-            if(render.flipX)
+            if (Input.GetKey(KeyCode.Z))
+            {
+                runON = true;
+                maxSpeed = 10;
+            }
+            else if (Input.GetKeyUp(KeyCode.Z))
+            {
+                runON = false;
+                maxSpeed = 5;
+            }
+
+            if (render.flipX)
             {
                 muzzlePoint.localPosition = new Vector3(-Mathf.Abs(muzzlePoint.localPosition.x), muzzlePoint.localPosition.y, muzzlePoint.localPosition.z);
             }
@@ -64,16 +75,7 @@ public class FireMarioController : MarioBassController
                 muzzlePoint.localPosition = new Vector3(Mathf.Abs(muzzlePoint.localPosition.x), muzzlePoint.localPosition.y, muzzlePoint.localPosition.z);
             }
 
-
             states[(int)curState].Update();
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (!GameManager.Instance.gameEnded)
-        {
-            states[(int)curState].FixedUpdate();
         }
     }
 
