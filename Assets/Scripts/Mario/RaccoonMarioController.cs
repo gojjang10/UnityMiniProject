@@ -1,17 +1,18 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-public class FireMarioController : MarioBassController
+public class RaccoonMarioController : MarioBassController
 {
     [SerializeField] protected GameObject smallMario;
     [SerializeField] protected AudioClip levelUp;
 
-    [SerializeField] private FireState fireState;
+    [SerializeField] private RaccoonJumpState raccoonJumpState;
+    [SerializeField] private RaccoonAttackState raccoonAttackState;
 
     [SerializeField] Transform muzzlePoint;
-    
 
     private void Awake()
     {
@@ -19,14 +20,15 @@ public class FireMarioController : MarioBassController
         states[(int)State.Walk] = walkState;
         states[(int)State.Jump] = jumpState;
         states[(int)State.Run] = runState;
-        states[(int)State.Fire] = fireState;
+        states[(int)State.RaccoonJump] = raccoonJumpState;
+        states[(int)State.RaccoonAttack] = raccoonAttackState; 
 
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         render = GetComponent<SpriteRenderer>();
 
         gameOverCoroutine = null;
-        curMarioType = MarioType.Fire;
+        curMarioType = MarioType.Raccoon;
         UIcontroller = GameObject.Find("GameOverText").GetComponent<UIcontroller>();
         powerUp = false;
         powerDown = false;
@@ -79,6 +81,7 @@ public class FireMarioController : MarioBassController
         }
     }
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (powerDown || powerUp) return;                                // 충돌 무시
@@ -104,15 +107,14 @@ public class FireMarioController : MarioBassController
     }
 
     [System.Serializable]
-    private class FireState : BaseMarioState
+    private class RaccoonJumpState : BaseMarioState
     {
-        [SerializeField] FireMarioController mario;
 
-        public override void Enter()
-        {
-            mario.animator.Play("Fire");
-            Debug.Log("Fire 발사");
-        }
+    }
+
+    [System.Serializable]
+    private class RaccoonAttackState : BaseMarioState
+    {
 
     }
 }

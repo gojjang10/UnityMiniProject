@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -36,6 +37,7 @@ public class MarioBassController : MonoBehaviour
 
     [SerializeField] protected bool isGrounded;
     [SerializeField] protected bool runON;
+    [SerializeField] protected float targetSpeed;
 
     [Header("Audio")]
     [SerializeField] protected AudioClip gameOver;
@@ -63,13 +65,17 @@ public class MarioBassController : MonoBehaviour
             if (Input.GetKey(KeyCode.Z))
             {
                 runON = true;
-                maxSpeed = 10;
+                maxSpeed = 12;
+                targetSpeed = maxSpeed;
+                
             }
-            else if (Input.GetKeyUp(KeyCode.Z))
+            else 
             {
                 runON = false;
-                maxSpeed = 5;
+                targetSpeed = 5;
             }
+
+            maxSpeed = Mathf.Lerp(maxSpeed, targetSpeed, deceleration * Time.deltaTime);
 
             states[(int)curState].Update();
         }
@@ -257,11 +263,18 @@ public class MarioBassController : MonoBehaviour
         [SerializeField] MarioBassController mario;
         [SerializeField] AudioClip jump;
         [SerializeField] float jumpPower;
+        [SerializeField] float maxJumpHeight;
+        private float startJumpHeight;
+        private bool falling;
+
 
         public override void Enter()
         {
             //maxJumpHeight = curJumpHeight;
             //mario.rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            startJumpHeight = mario.transform.position.y;
+            falling = false;
+
             mario.rigid.velocity = new Vector2(mario.rigid.velocity.x, jumpPower);
             Debug.Log("점프 진입");
 
@@ -302,6 +315,20 @@ public class MarioBassController : MonoBehaviour
 
         public override void FixedUpdate()
         {
+            // 점프 높낮이 구현
+            float currentHeight = mario.transform.position.y;
+
+            if(Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight < maxJumpHeight && !falling)
+            {
+                mario.rigid.velocity = new Vector2(mario.rigid.velocity.x, jumpPower);
+ 
+            }
+            if (Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight >= maxJumpHeight)
+            {
+                falling = true;
+            }
+
+
 
             //mario.rigid.AddForce(Vector2.right * mario.x * mario.movePower, ForceMode2D.Impulse);
 
@@ -351,7 +378,7 @@ public class MarioBassController : MonoBehaviour
                 mario.ChangeState(State.Idle);
             }
 
-            if (!mario.runON)
+            if (!mario.runON && mario.currentSpeed < mario.maxFallSpeed)
             {
                 mario.ChangeState(State.Walk);
             }
