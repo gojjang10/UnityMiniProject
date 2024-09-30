@@ -16,33 +16,32 @@ public class MarioBassController : MonoBehaviour
     [SerializeField] protected RunState runState;
 
 
-    [Header("Physics")]
-    [SerializeField] protected Rigidbody2D rigid;
-    [SerializeField] protected SpriteRenderer render;
-    [SerializeField] protected CapsuleCollider2D body;
+    
+    [field:SerializeField] public Rigidbody2D rigid {  get; protected set; }
+    [field:SerializeField] public SpriteRenderer render { get; protected set; }
+    [field:SerializeField] public CapsuleCollider2D body { get; protected set; }
 
     [Header("MoveProperty")]
     [SerializeField] private float acceleration;    // 가속도
-    [SerializeField] private float deceleration;    // 감속도
-    [SerializeField] private float currentSpeed;    // 현재속도
-    [SerializeField] protected float maxSpeed;        // 최대 속도
-    [SerializeField] protected float maxFallSpeed;
+    [field:SerializeField] public float deceleration { get; protected set; }    // 감속도
+    [field:SerializeField] public float currentSpeed { get; protected set; }    // 현재속도
+    [field:SerializeField] public float maxSpeed { get; protected set; }       // 최대 속도
+    [field: SerializeField] public float maxFallSpeed { get; protected set; }
 
 
-    [Header("Animation")]
-    [SerializeField] protected Animator animator;
+    //[Header("Animation")]
+    [field:SerializeField] public Animator animator { get; protected set; }
 
+    //[Header("Property")]
 
-    [Header("Property")]
-
-    [SerializeField] protected bool isGrounded;
-    [SerializeField] protected bool runON;
-    [SerializeField] protected float targetSpeed;
+    [field:SerializeField] public bool isGrounded { get; protected set; }
+    [field:SerializeField] public bool runON { get; protected set; }
+    [field:SerializeField] protected float targetSpeed;
 
     [Header("Audio")]
     [SerializeField] protected AudioClip gameOver;
 
-    protected float x;                                            // X 축 입력을 위한 변수
+    [field:SerializeField] public float x { get; protected set; }                                           // X 축 입력을 위한 변수
     protected WaitForSeconds delay = new WaitForSeconds(1f);      // 코루틴 캐싱
     protected Coroutine gameOverCoroutine;                        // 코루틴 변수
     protected Coroutine playerDamagedCoroutine;                   // 코루틴 변수
@@ -139,7 +138,7 @@ public class MarioBassController : MonoBehaviour
         //RaycastHit2D hit = Physics2D.Raycast(rayStartPosition, Vector2.down, 0.2f, LayerMask.GetMask("Ground"));
         RaycastHit2D[] hits = Physics2D.RaycastAll(rayStartPosition, Vector2.down, 0.2f);
 
-        if (hits != null && hits.Length > 0)
+        if (hits != null && hits.Length >= 1)
         {
             foreach (RaycastHit2D hit in hits)
             {
@@ -147,13 +146,13 @@ public class MarioBassController : MonoBehaviour
 
                 if (hit.collider.gameObject.CompareTag("Ground"))    // 레이어 6번 : Ground
                 {
-                    //Debug.Log("콜라이더 감지 6번");
+                    Debug.Log("콜라이더 감지 6번");
                     isGrounded = true;
 
                 }
                 else if (hit.collider.gameObject.CompareTag("Box"))     // 레이어 8번 : Box
                 {
-                    //Debug.Log("콜라이더 감지 8번");
+                    Debug.Log("콜라이더 감지 8번");
                     isGrounded = true;
 
                 }
@@ -265,21 +264,26 @@ public class MarioBassController : MonoBehaviour
         [SerializeField] float jumpPower;
         [SerializeField] float maxJumpHeight;
         private float startJumpHeight;
-        private bool falling;
+        public bool falling = false;
+        public int jumpCount = 1;
 
 
         public override void Enter()
         {
-            //maxJumpHeight = curJumpHeight;
-            //mario.rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            startJumpHeight = mario.transform.position.y;
-            falling = false;
+ 
+                //maxJumpHeight = curJumpHeight;
+                //mario.rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                startJumpHeight = mario.transform.position.y;
+                falling = false;
+                jumpCount--;
 
-            mario.rigid.velocity = new Vector2(mario.rigid.velocity.x, jumpPower);
-            Debug.Log("점프 진입");
+                mario.rigid.velocity = new Vector2(mario.rigid.velocity.x, jumpPower);
 
-            mario.animator.Play("Jump");
-            SoundManager.Instance.PlaySFX(jump);
+
+                Debug.Log("점프 진입");
+                mario.animator.Play("Jump");
+                SoundManager.Instance.PlaySFX(jump);
+
 
         }
 
@@ -289,6 +293,7 @@ public class MarioBassController : MonoBehaviour
 
             if (mario.isGrounded && mario.rigid.velocity.y <= 0.01f)            // 땅에 있을때 && 확실하게 velocity로 값 확인
             {
+                jumpCount = 1;
                 if (mario.runON)
                 {
                     mario.ChangeState(State.Run);
@@ -318,16 +323,23 @@ public class MarioBassController : MonoBehaviour
             // 점프 높낮이 구현
             float currentHeight = mario.transform.position.y;
 
-            if(Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight < maxJumpHeight && !falling)
+            if(jumpCount == 0)
             {
-                mario.rigid.velocity = new Vector2(mario.rigid.velocity.x, jumpPower);
- 
-            }
-            if (Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight >= maxJumpHeight)
-            {
-                falling = true;
-            }
+                if (Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight < maxJumpHeight && !falling)
+                {
+                    Debug.Log("위로 힘 가해주기");
+                    mario.rigid.velocity = new Vector2(mario.rigid.velocity.x, jumpPower);
+                    if (Input.GetKeyUp(KeyCode.Space))
+                    {
+                        falling = true;
+                    }
 
+                }
+                if (Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight >= maxJumpHeight)
+                {
+                    falling = true;
+                }
+            }
 
 
             //mario.rigid.AddForce(Vector2.right * mario.x * mario.movePower, ForceMode2D.Impulse);

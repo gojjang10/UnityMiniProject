@@ -251,20 +251,23 @@ MonoBehaviour:
     mario: {fileID: 8633205197426539875}
     jump: {fileID: 8300000, guid: 5102d1d1b71d7eb4f87be41d3eb7df13, type: 3}
     jumpPower: 17
+    maxJumpHeight: 3
   runState:
     mario: {fileID: 8633205197426539875}
-  rigid: {fileID: 5735071706738478299}
-  render: {fileID: 5735071706738478301}
-  body: {fileID: 7001229799187616209}
+  <rigid>k__BackingField: {fileID: 0}
+  <render>k__BackingField: {fileID: 0}
+  <body>k__BackingField: {fileID: 0}
   acceleration: 20
-  deceleration: 10
-  currentSpeed: 0
-  maxSpeed: 5
-  maxFallSpeed: 20
-  animator: {fileID: 8741261603605875143}
-  isGrounded: 0
-  runON: 0
+  <deceleration>k__BackingField: 10
+  <currentSpeed>k__BackingField: 0
+  <maxSpeed>k__BackingField: 5
+  <maxFallSpeed>k__BackingField: 20
+  <animator>k__BackingField: {fileID: 0}
+  <isGrounded>k__BackingField: 0
+  <runON>k__BackingField: 0
+  targetSpeed: 0
   gameOver: {fileID: 8300000, guid: 54b26ed14c6eeda4c857d9ca9723f3fd, type: 3}
+  <x>k__BackingField: 0
   onGameOver:
     m_PersistentCalls:
       m_Calls: []
