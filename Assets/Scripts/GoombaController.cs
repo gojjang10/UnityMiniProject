@@ -56,7 +56,21 @@ public class GoombaController : Monster
             live = false;
             StartCoroutine(HitFireBall());
         }
+
+ 
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Tail"))
+        // 꼬리에 맞았을때
+        {
+            SoundManager.Instance.PlaySFX(hitSFX);
+            live = false;
+            StartCoroutine(HitFireBall());
+        }
+    }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -65,6 +79,8 @@ public class GoombaController : Monster
         {
             Destroy(gameObject);
         }
+
+
     }
 
     private IEnumerator AnimPlay()

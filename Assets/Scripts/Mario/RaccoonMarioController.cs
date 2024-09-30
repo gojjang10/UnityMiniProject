@@ -185,7 +185,7 @@ public class RaccoonMarioController : MarioBassController
             mario.rigid.velocity = new Vector2(mario.rigid.velocity.x, jumpPower);
             Debug.Log("점프 진입");
 
-            mario.animator.Play("Jump");
+            mario.animator.Play("RaccoonJump");
             SoundManager.Instance.PlaySFX(jump);
 
         }
@@ -207,6 +207,7 @@ public class RaccoonMarioController : MarioBassController
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    mario.animator.Play("RaccoonJumpFall");
                     mario.rigid.velocity = new Vector2(mario.rigid.velocity.x, 0);              // 스페이스바 연타로 떨어지는 속도 상쇄
                 }
             }

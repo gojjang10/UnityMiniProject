@@ -13,6 +13,7 @@ public class FireBallShooter : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.X))
         {
+
             SoundManager.Instance.PlaySFX(fire);
             Fire();
         }

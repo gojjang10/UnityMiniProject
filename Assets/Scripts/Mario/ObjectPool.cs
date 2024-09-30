@@ -6,7 +6,7 @@ public class ObjectPool : MonoBehaviour
 {
     [SerializeField] List<PooledObject> pool = new List<PooledObject>();
     [SerializeField] PooledObject prefab;
-    int size = 3;
+    [SerializeField] int size = 3;
 
     private void Awake()
     // 오브젝트 풀 패턴을 사용해서 미리 오브젝트 반복문으로 생성해두기

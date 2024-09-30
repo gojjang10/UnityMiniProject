@@ -13,6 +13,7 @@ TagManager:
   - FireBall
   - Ground
   - Box
+  - Tail
   layers:
   - Default
   - TransparentFX
