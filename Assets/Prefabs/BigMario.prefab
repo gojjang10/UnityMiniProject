@@ -170,6 +170,8 @@ MonoBehaviour:
     jump: {fileID: 8300000, guid: 5102d1d1b71d7eb4f87be41d3eb7df13, type: 3}
     jumpPower: 17
     maxJumpHeight: 0
+    falling: 0
+    jumpCount: 1
   runState:
     mario: {fileID: 1946331129}
   <rigid>k__BackingField: {fileID: 0}
@@ -198,6 +200,7 @@ MonoBehaviour:
     m_Bits: 256
   fireMario: {fileID: 5735071706738478296, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
   smallMario: {fileID: 6054904185904563936, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
+  raccoonMario: {fileID: 6235891186421553267, guid: a14bbf68c8f23324296079ae6419320c, type: 3}
   levelUp: {fileID: 8300000, guid: 32768fbb4ff04ec4283f92b46b9fa780, type: 3}
 --- !u!1 &8326999526490411543
 GameObject:

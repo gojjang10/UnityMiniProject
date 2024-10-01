@@ -233,7 +233,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   smallMario: {fileID: 6054904185904563936, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
-  levelUp: {fileID: 0}
+  levelUp: {fileID: 8300000, guid: 32768fbb4ff04ec4283f92b46b9fa780, type: 3}
   raccoonRunState:
     mario: {fileID: 6235891186421553266}
   raccoonJumpState:

@@ -10,6 +10,7 @@ public class BigMarioController : MarioBassController
 {
     [SerializeField] protected GameObject fireMario;
     [SerializeField] protected GameObject smallMario;
+    [SerializeField] protected GameObject raccoonMario;
     [SerializeField] protected AudioClip levelUp;
  
 
@@ -72,6 +73,14 @@ public class BigMarioController : MarioBassController
             Debug.Log("FireMario 생성");
             Destroy(gameObject);
         }
+        else if (collision.collider.CompareTag("Leaf"))
+        {
+            powerUp = true;
+            Instantiate(raccoonMario, transform.position, Quaternion.identity);
+            Debug.Log("BigMario 생성");
+            Destroy(gameObject);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
