@@ -13,7 +13,7 @@ public class RaccoonMarioController : MarioBassController
     [SerializeField] private RaccoonJumpState raccoonJumpState;
     [SerializeField] private RaccoonAttackState raccoonAttackState;
 
-    //[SerializeField] Transform muzzlePoint;
+    [SerializeField] Transform muzzlePoint;
 
     private bool canFly;
     private bool flyCoroutine;
@@ -76,14 +76,14 @@ public class RaccoonMarioController : MarioBassController
             }
 
             maxSpeed = Mathf.Lerp(maxSpeed, targetSpeed, deceleration * Time.deltaTime);
-            //if (render.flipX)
-            //{
-            //    muzzlePoint.localPosition = new Vector3(-Mathf.Abs(muzzlePoint.localPosition.x), muzzlePoint.localPosition.y, muzzlePoint.localPosition.z);
-            //}
-            //else
-            //{
-            //    muzzlePoint.localPosition = new Vector3(Mathf.Abs(muzzlePoint.localPosition.x), muzzlePoint.localPosition.y, muzzlePoint.localPosition.z);
-            //}
+            if (render.flipX)
+            {
+                muzzlePoint.localPosition = new Vector3(-Mathf.Abs(muzzlePoint.localPosition.x), muzzlePoint.localPosition.y, muzzlePoint.localPosition.z);
+            }
+            else
+            {
+                muzzlePoint.localPosition = new Vector3(Mathf.Abs(muzzlePoint.localPosition.x), muzzlePoint.localPosition.y, muzzlePoint.localPosition.z);
+            }
 
             states[(int)curState].Update();
         }
@@ -104,6 +104,7 @@ public class RaccoonMarioController : MarioBassController
             Instantiate(smallMario, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -242,6 +242,7 @@ MonoBehaviour:
     jump: {fileID: 8300000, guid: 5102d1d1b71d7eb4f87be41d3eb7df13, type: 3}
     jumpPower: 13
     maxJumpHeight: 3
+  muzzlePoint: {fileID: 3930872796753235666}
 --- !u!114 &4153601622931117906
 MonoBehaviour:
   m_ObjectHideFlags: 0
