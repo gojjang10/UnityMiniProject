@@ -6,23 +6,30 @@ public class GameScene : MonoBehaviour
 {
     [SerializeField] GameObject titleScreen;
     [SerializeField] GameObject anykey;
+    [SerializeField] GameObject gameUI;
     [SerializeField] AudioClip bgm;
 
     private bool gameStart = false;
 
+
+
     private void Start()
     {
         Time.timeScale = 0f;
+        GameManager.Instance.gameEnded = false;
 
         SoundManager.Instance.LoopBGM(true);
         SoundManager.Instance.StopCurBGM();
         titleScreen.gameObject.SetActive(true);
         anykey.SetActive(true);
+        gameUI.SetActive(false);
     }
 
     private void Update()
     {
-        if(!gameStart && Input.anyKeyDown)
+
+
+        if (!gameStart && Input.anyKeyDown)
         {
             StartGame();
         }
@@ -34,6 +41,9 @@ public class GameScene : MonoBehaviour
         gameStart = true;
         titleScreen.gameObject.SetActive(false);
         anykey.SetActive(false);
+        gameUI.SetActive(true);
+        GameManager.Instance.coin = 0;
+        GameManager.Instance.score = 0;
         Time.timeScale = 1f;
 
         if (SoundManager.Instance != null)

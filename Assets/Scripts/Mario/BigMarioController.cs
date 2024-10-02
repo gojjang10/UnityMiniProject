@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -66,7 +67,7 @@ public class BigMarioController : MarioBassController
 
         }
 
-        else if (collision.collider.CompareTag("Flower"))
+        if (collision.collider.CompareTag("Flower"))
         {
             powerUp = true;
             Instantiate(fireMario, transform.position, Quaternion.identity);
@@ -77,7 +78,7 @@ public class BigMarioController : MarioBassController
         {
             powerUp = true;
             Instantiate(raccoonMario, transform.position, Quaternion.identity);
-            Debug.Log("BigMario 생성");
+            Debug.Log("RaccoonMario 생성");
             Destroy(gameObject);
         }
 
@@ -85,9 +86,22 @@ public class BigMarioController : MarioBassController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("GameOver"))
+        bool hit = false;
+        if (collision.CompareTag("GameOver"))               // 게임오버 존에 닿았을때
         {
             Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Coin"))        // 코인이랑 부딪혔을때
+        {
+            if (!hit)
+            {
+                SoundManager.Instance.PlaySFX(coin);
+                GameManager.Instance.score += 100;
+                GameManager.Instance.coin++;
+                hit = true;
+                Destroy(collision.gameObject);
+            }
         }
     }
 }

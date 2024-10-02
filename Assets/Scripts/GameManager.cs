@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public bool gameCleared = false;
     public bool playerDamaged = false;
     public CinemachineVirtualCamera marioCam;
-    public int score;
+    public int score = 0;
+    public int coin = 0;
 
     private void Awake()
     {
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+
         if (gameEnded && Input.GetKeyDown(KeyCode.R))
         {
             RestartGame();
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
         {
             RestartGame();
         }
+
     }
 
     public void GameOver()
@@ -62,10 +65,12 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        gameCleared = false;
+        gameEnded = false;
+
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
-        gameCleared = false ;
-        gameEnded = false ;
+
     }
 
 }

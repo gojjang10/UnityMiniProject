@@ -1,11 +1,13 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class FireMarioController : MarioBassController
 {
     [SerializeField] protected GameObject smallMario;
+    [SerializeField] protected GameObject raccoonMario;
     [SerializeField] protected AudioClip levelUp;
 
     [SerializeField] private FireState fireState;
@@ -93,13 +95,34 @@ public class FireMarioController : MarioBassController
             Instantiate(smallMario, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
+        else if (collision.collider.CompareTag("Leaf"))
+        {
+            powerUp = true;
+            Instantiate(raccoonMario, transform.position, Quaternion.identity);
+            Debug.Log("RaccoonMario 생성");
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        bool hit = false;   
+
         if (collision.CompareTag("GameOver"))
         {
             Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Coin"))        // 코인이랑 부딪혔을때
+        {
+            if (!hit)
+            {
+                SoundManager.Instance.PlaySFX(coin);
+                GameManager.Instance.score += 100;
+                GameManager.Instance.coin++;
+                hit = true;
+                Destroy(collision.gameObject);
+            }
         }
     }
 

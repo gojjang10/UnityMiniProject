@@ -37,9 +37,15 @@ public class QuestionMarkBlock : MonoBehaviour
             if (mario == null)
             {
                 BigMarioController bigmario = collision.gameObject.GetComponent<BigMarioController>();
+                FireMarioController fireMario = collision.gameObject.GetComponent<FireMarioController>();
+               
                 if(bigmario != null)
                 {
                     SpawnItem(bigmario);
+                }
+                else if(fireMario != null)
+                {
+                    SpawnItem(fireMario);
                 }
             }
 

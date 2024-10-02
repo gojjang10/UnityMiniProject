@@ -89,9 +89,24 @@ public class MarioController : MarioBassController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        bool hit = false;
+
         if (collision.CompareTag("GameOver"))
         {
             Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Coin"))        // 코인이랑 부딪혔을때
+        {
+            if(!hit)
+            {
+                SoundManager.Instance.PlaySFX(coin);
+                GameManager.Instance.score += 100;
+                GameManager.Instance.coin++;
+                hit = true;
+                Destroy(collision.gameObject);
+            }
+
         }
     }
 
@@ -100,7 +115,6 @@ public class MarioController : MarioBassController
         rigid.velocity = Vector2.zero;
   
         gameObject.GetComponent<CapsuleCollider2D>().enabled = false;   // 충돌체 비활성화
-        body.enabled = false;                                           // 충돌체 비활성화
         rigid.isKinematic = true;                                       // 중력 true
         animator.Play("GameOver");
 

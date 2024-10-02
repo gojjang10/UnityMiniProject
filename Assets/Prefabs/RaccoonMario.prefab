@@ -29,7 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6235891186421553273}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6235891186421553267
 GameObject:
@@ -66,7 +66,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9193241971799469894}
   - {fileID: 3930872796753235666}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -174,7 +173,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 6235891186421553267}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7616afd4c2e061f40897f7826f55cb1d, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -205,12 +204,10 @@ MonoBehaviour:
     jumpPower: 13
     maxJumpHeight: 3
     falling: 0
-    jumpCount: 1
   runState:
     mario: {fileID: 6235891186421553266}
   <rigid>k__BackingField: {fileID: 6235891186421553268}
   <render>k__BackingField: {fileID: 6235891186421553270}
-  <body>k__BackingField: {fileID: 2379684502747004507}
   acceleration: 20
   <deceleration>k__BackingField: 10
   <currentSpeed>k__BackingField: 0
@@ -221,11 +218,13 @@ MonoBehaviour:
   <runON>k__BackingField: 0
   targetSpeed: 0
   gameOver: {fileID: 8300000, guid: 54b26ed14c6eeda4c857d9ca9723f3fd, type: 3}
+  coin: {fileID: 8300000, guid: cd1e7c7bb0ac2b94b91591621c38ff32, type: 3}
   <x>k__BackingField: 0
   onGameOver:
     m_PersistentCalls:
       m_Calls: []
   UIcontroller: {fileID: 0}
+  jumpCount: 1
   ground:
     serializedVersion: 2
     m_Bits: 64
@@ -234,14 +233,20 @@ MonoBehaviour:
     m_Bits: 256
   smallMario: {fileID: 6054904185904563936, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
   levelUp: {fileID: 8300000, guid: 32768fbb4ff04ec4283f92b46b9fa780, type: 3}
+  raccoonJumpState:
+    mario: {fileID: 6235891186421553266}
+    jump: {fileID: 8300000, guid: 5102d1d1b71d7eb4f87be41d3eb7df13, type: 3}
+    jumpPower: 13
+    maxJumpHeight: 3
+    falling: 0
+    jumpCount: 1
   raccoonRunState:
     mario: {fileID: 6235891186421553266}
-  raccoonJumpState:
+  raccoonDashJumpState:
     mario: {fileID: 6235891186421553266}
     raccoonMario: {fileID: 6235891186421553266}
     jump: {fileID: 8300000, guid: 5102d1d1b71d7eb4f87be41d3eb7df13, type: 3}
     jumpPower: 13
-    maxJumpHeight: 3
   muzzlePoint: {fileID: 3930872796753235666}
 --- !u!114 &4153601622931117906
 MonoBehaviour:
@@ -274,51 +279,3 @@ MonoBehaviour:
   pool: []
   prefab: {fileID: 4372080951354551364, guid: 19c9e853fdb39234da31c9ffcdaf7b3a, type: 3}
   size: 1
---- !u!1 &6567073591728195432
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9193241971799469894}
-  - component: {fileID: 2379684502747004507}
-  m_Layer: 0
-  m_Name: Body
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9193241971799469894
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6567073591728195432}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.17, y: 0.88, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6235891186421553273}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &2379684502747004507
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6567073591728195432}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 7616afd4c2e061f40897f7826f55cb1d, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.057214618}
-  m_Size: {x: 1.0890045, y: 1.6230085}
-  m_Direction: 0

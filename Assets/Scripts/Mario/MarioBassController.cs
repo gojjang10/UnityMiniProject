@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,32 +15,32 @@ public class MarioBassController : MonoBehaviour
     [SerializeField] protected RunState runState;
 
 
-    
-    [field:SerializeField] public Rigidbody2D rigid {  get; protected set; }
-    [field:SerializeField] public SpriteRenderer render { get; protected set; }
-    [field:SerializeField] public CapsuleCollider2D body { get; protected set; }
+
+    [field: SerializeField] public Rigidbody2D rigid { get; protected set; }
+    [field: SerializeField] public SpriteRenderer render { get; protected set; }
 
     [Header("MoveProperty")]
     [SerializeField] private float acceleration;    // 가속도
-    [field:SerializeField] public float deceleration { get; protected set; }    // 감속도
-    [field:SerializeField] public float currentSpeed { get; protected set; }    // 현재속도
-    [field:SerializeField] public float maxSpeed { get; protected set; }       // 최대 속도
+    [field: SerializeField] public float deceleration { get; protected set; }    // 감속도
+    [field: SerializeField] public float currentSpeed { get; protected set; }    // 현재속도
+    [field: SerializeField] public float maxSpeed { get; protected set; }       // 최대 속도
     [field: SerializeField] public float maxFallSpeed { get; protected set; }
 
 
     //[Header("Animation")]
-    [field:SerializeField] public Animator animator { get; protected set; }
+    [field: SerializeField] public Animator animator { get; protected set; }
 
     //[Header("Property")]
 
-    [field:SerializeField] public bool isGrounded { get; protected set; }
-    [field:SerializeField] public bool runON { get; protected set; }
-    [field:SerializeField] protected float targetSpeed;
+    [field: SerializeField] public bool isGrounded { get; protected set; }
+    [field: SerializeField] public bool runON { get; protected set; }
+    [field: SerializeField] protected float targetSpeed;
 
     [Header("Audio")]
     [SerializeField] protected AudioClip gameOver;
+    [SerializeField] protected AudioClip coin;
 
-    [field:SerializeField] public float x { get; protected set; }                                           // X 축 입력을 위한 변수
+    [field: SerializeField] public float x { get; protected set; }                                           // X 축 입력을 위한 변수
     protected WaitForSeconds delay = new WaitForSeconds(1f);      // 코루틴 캐싱
     protected Coroutine gameOverCoroutine;                        // 코루틴 변수
     protected Coroutine playerDamagedCoroutine;                   // 코루틴 변수
@@ -51,24 +50,25 @@ public class MarioBassController : MonoBehaviour
     [SerializeField] protected UIcontroller UIcontroller;
     protected bool powerUp = false;
     protected bool powerDown = false;
+    public int jumpCount = 1;
 
     public LayerMask ground;
     public LayerMask box;
 
     private void Update()
     {
-        if (!GameManager.Instance.gameEnded)
+        if (!GameManager.Instance.gameEnded && !GameManager.Instance.gameCleared)
         {
             GroundCheck();
             //x = Input.GetAxis("Horizontal");
             if (Input.GetKey(KeyCode.Z))
             {
                 runON = true;
-                maxSpeed = 12;
+                maxSpeed = 10;
                 targetSpeed = maxSpeed;
-                
+
             }
-            else 
+            else
             {
                 runON = false;
                 targetSpeed = 5;
@@ -82,7 +82,7 @@ public class MarioBassController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!GameManager.Instance.gameEnded)
+        if (!GameManager.Instance.gameEnded && !GameManager.Instance.gameCleared)
         {
             VelocityMove();
             states[(int)curState].FixedUpdate();
@@ -265,35 +265,43 @@ public class MarioBassController : MonoBehaviour
         [SerializeField] float maxJumpHeight;
         private float startJumpHeight;
         public bool falling = false;
-        public int jumpCount = 1;
+
 
 
         public override void Enter()
         {
- 
-                //maxJumpHeight = curJumpHeight;
-                //mario.rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                startJumpHeight = mario.transform.position.y;
-                falling = false;
-                jumpCount--;
 
+            //maxJumpHeight = curJumpHeight;
+            //mario.rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            startJumpHeight = mario.transform.position.y;
+            falling = false;
+
+            if (mario.jumpCount == 1)
+            {
                 mario.rigid.velocity = new Vector2(mario.rigid.velocity.x, jumpPower);
+                mario.jumpCount = 0;
+                Debug.Log($"점프카운트{mario.jumpCount}");
+            }
 
-
-                Debug.Log("점프 진입");
-                mario.animator.Play("Jump");
-                SoundManager.Instance.PlaySFX(jump);
+            Debug.Log("점프 진입");
+            mario.animator.Play("Jump");
+            SoundManager.Instance.PlaySFX(jump);
 
 
         }
 
         public override void Update()
         {
-
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                Debug.Log("스페이스바 떼짐");
+                falling = true;
+            }
 
             if (mario.isGrounded && mario.rigid.velocity.y <= 0.01f)            // 땅에 있을때 && 확실하게 velocity로 값 확인
             {
-                jumpCount = 1;
+                mario.jumpCount = 1;
+                Debug.Log($"업데이트 점프카운트{mario.jumpCount}");
                 if (mario.runON)
                 {
                     mario.ChangeState(State.Run);
@@ -323,35 +331,21 @@ public class MarioBassController : MonoBehaviour
             // 점프 높낮이 구현
             float currentHeight = mario.transform.position.y;
 
-            if(jumpCount == 0)
+            if (mario.jumpCount == 0)
             {
+                Debug.Log("픽스드업데이트로 현재 점프중");
+
                 if (Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight < maxJumpHeight && !falling)
                 {
                     Debug.Log("위로 힘 가해주기");
                     mario.rigid.velocity = new Vector2(mario.rigid.velocity.x, jumpPower);
-                    if (Input.GetKeyUp(KeyCode.Space))
-                    {
-                        falling = true;
-                    }
-
                 }
+
                 if (Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight >= maxJumpHeight)
                 {
                     falling = true;
                 }
             }
-
-
-            //mario.rigid.AddForce(Vector2.right * mario.x * mario.movePower, ForceMode2D.Impulse);
-
-            //if (mario.rigid.velocity.x > mario.maxMoveSpeed)
-            //{
-            //    mario.rigid.velocity = new Vector2(mario.maxMoveSpeed, mario.rigid.velocity.y);
-            //}
-            //else if (mario.rigid.velocity.x < -mario.maxMoveSpeed)
-            //{
-            //    mario.rigid.velocity = new Vector2(-mario.maxMoveSpeed, mario.rigid.velocity.y);
-            //}
 
             // 캐릭터 이미지 전환
             if (mario.x < 0)
@@ -369,6 +363,7 @@ public class MarioBassController : MonoBehaviour
             }
         }
     }
+
     [System.Serializable]
     protected class RunState : BaseMarioState
     {
@@ -381,10 +376,6 @@ public class MarioBassController : MonoBehaviour
 
         public override void Update()
         {
-            //if(Input.GetKeyUp(KeyCode.Z))
-            //{
-            //    mario.ChangeState(State.Walk);
-            //}
             if (mario.currentSpeed == 0)
             {
                 mario.ChangeState(State.Idle);
