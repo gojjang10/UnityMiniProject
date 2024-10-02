@@ -48,9 +48,11 @@ public class MarioBassController : MonoBehaviour
                                                                 // 마리오의 현재 타입
 
     [SerializeField] protected UIcontroller UIcontroller;
+    [SerializeField] protected SpeedUI speedUI;
     protected bool powerUp = false;
     protected bool powerDown = false;
     public int jumpCount = 1;
+    public bool falling = false;
 
     public LayerMask ground;
     public LayerMask box;
@@ -75,8 +77,12 @@ public class MarioBassController : MonoBehaviour
             }
 
             maxSpeed = Mathf.Lerp(maxSpeed, targetSpeed, deceleration * Time.deltaTime);
+            speedUI.UpdateSpeedUI(currentSpeed, maxSpeed);
+            Debug.Log("스피드UI 활성화");
 
             states[(int)curState].Update();
+
+            
         }
     }
 
@@ -114,11 +120,6 @@ public class MarioBassController : MonoBehaviour
 
         rigid.velocity = new Vector2(currentSpeed, rigid.velocity.y);
         // 현재 속도를 설정한 currentSpeed로 설정
-
-        //if (rigid.velocity.y > maxFallSpeed)
-        //{
-        //    rigid.velocity = new Vector2(rigid.velocity.x, maxFallSpeed);
-        //}
 
 
     }
@@ -264,7 +265,6 @@ public class MarioBassController : MonoBehaviour
         [SerializeField] float jumpPower;
         [SerializeField] float maxJumpHeight;
         private float startJumpHeight;
-        public bool falling = false;
 
 
 
@@ -274,7 +274,7 @@ public class MarioBassController : MonoBehaviour
             //maxJumpHeight = curJumpHeight;
             //mario.rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             startJumpHeight = mario.transform.position.y;
-            falling = false;
+            mario.falling = false;
 
             if (mario.jumpCount == 1)
             {
@@ -295,7 +295,7 @@ public class MarioBassController : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 Debug.Log("스페이스바 떼짐");
-                falling = true;
+                mario.falling = true;
             }
 
             if (mario.isGrounded && mario.rigid.velocity.y <= 0.01f)            // 땅에 있을때 && 확실하게 velocity로 값 확인
@@ -335,7 +335,7 @@ public class MarioBassController : MonoBehaviour
             {
                 Debug.Log("픽스드업데이트로 현재 점프중");
 
-                if (Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight < maxJumpHeight && !falling)
+                if (Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight < maxJumpHeight && !mario.falling)
                 {
                     Debug.Log("위로 힘 가해주기");
                     mario.rigid.velocity = new Vector2(mario.rigid.velocity.x, jumpPower);
@@ -343,7 +343,7 @@ public class MarioBassController : MonoBehaviour
 
                 if (Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight >= maxJumpHeight)
                 {
-                    falling = true;
+                    mario.falling = true;
                 }
             }
 

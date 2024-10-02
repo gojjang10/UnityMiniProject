@@ -21,7 +21,7 @@ public class Leaf : Item
 
     private void FixedUpdate()      // 살랑살랑 떨어지는 로직
     {
-        float sway = Mathf.Sin(Time.time * swaySpeed) * swayAmount;
+        float sway = Mathf.Sin(Time.time * swaySpeed) * swayAmount;     // 삼각함수를 사용하여 진자운동 구현
         rb.velocity = new Vector2(sway, -fallSpeed);
     }
 

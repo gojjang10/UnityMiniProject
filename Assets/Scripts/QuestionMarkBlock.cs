@@ -38,6 +38,7 @@ public class QuestionMarkBlock : MonoBehaviour
             {
                 BigMarioController bigmario = collision.gameObject.GetComponent<BigMarioController>();
                 FireMarioController fireMario = collision.gameObject.GetComponent<FireMarioController>();
+                RaccoonMarioController raccoonMario = collision.gameObject.GetComponent<RaccoonMarioController>();
                
                 if(bigmario != null)
                 {
@@ -46,6 +47,10 @@ public class QuestionMarkBlock : MonoBehaviour
                 else if(fireMario != null)
                 {
                     SpawnItem(fireMario);
+                }
+                else if(raccoonMario != null)
+                {
+                    SpawnItem(raccoonMario);
                 }
             }
 

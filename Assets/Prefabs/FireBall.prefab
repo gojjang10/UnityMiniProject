@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8366712573957320827}
   - component: {fileID: 8957488409425998126}
   - component: {fileID: 276909208600241845}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FireBall
   m_TagString: FireBall
   m_Icon: {fileID: 0}
@@ -141,12 +141,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: dc814019f93882446a48ac28893408a8, type: 2}
+  m_GravityScale: 2
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &8957488409425998126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,10 +160,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  bounceForce: 5
+  bounceForce: 6
   rb: {fileID: 8366712573957320827}
   velocity: {x: 0, y: 0}
-  fire: {fileID: 8300000, guid: 151878880aacdaa49829f317f5a2178f, type: 3}
 --- !u!114 &276909208600241845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,9 +170,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7554309093489747294}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0331303326cecd24d89aef136ec5f36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   returnPool: {fileID: 0}
+  returnTime: 2
+  curTime: 0

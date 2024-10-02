@@ -43,6 +43,8 @@ public class GoombaController : Monster
         if(collision.collider.CompareTag("Player") && collision.transform.position.y > transform.position.y + 0.1f)
             // 마리오가 밟았을때
         {
+            Rigidbody2D mario = collision.gameObject.GetComponent<Rigidbody2D>();
+            mario.velocity = mario.velocity = new Vector2(mario.velocity.x, 10f);           // 마리오를 통 튀게 해주는 역할
             SoundManager.Instance.PlaySFX(steppedSfx);
             live = false;
 

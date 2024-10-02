@@ -169,6 +169,8 @@ MonoBehaviour:
     Item: {fileID: 8524713320266179596, guid: 3f9931e2cb1ee5b4c81ef9f85d2f6713, type: 3}
   - mariostate: 2
     Item: {fileID: 8524713320266179596, guid: 3f9931e2cb1ee5b4c81ef9f85d2f6713, type: 3}
+  - mariostate: 3
+    Item: {fileID: 6213706326354139892, guid: e7ba07fa4024e7d489cb45f5bd02a518, type: 3}
 --- !u!61 &7159846022714874802
 BoxCollider2D:
   m_ObjectHideFlags: 0

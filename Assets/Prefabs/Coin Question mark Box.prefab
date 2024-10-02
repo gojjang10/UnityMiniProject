@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 860336971772255318}
   - component: {fileID: 461593267534937670}
   - component: {fileID: -8902140128128692467}
-  - component: {fileID: 275702176}
   - component: {fileID: 8050752085957908595}
+  - component: {fileID: 4574982950722601656}
   m_Layer: 8
-  m_Name: Coin Question mark Box 1
-  m_TagString: Untagged
+  m_Name: Coin Question mark Box
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,24 +147,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &275702176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3240032338386881160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23eda9e596231184dbda3f15b594387b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 461593267534937670}
-  hitSound: {fileID: 8300000, guid: 381a6cc4776a4c44cba7e8ab77a4546b, type: 3}
-  height: 0.8
-  slots:
-  - mariostate: 0
-    Item: {fileID: 62017579172113911, guid: d8347c790e6a1b1449e1f0e386c51a98, type: 3}
 --- !u!61 &8050752085957908595
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -191,3 +173,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4574982950722601656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240032338386881160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4edf9c8a6a5bb148933310166839e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 6184800864547214182, guid: 6352a2d415a72bb4da24457b69d91713, type: 3}
+  coinAnimator: {fileID: 4757589813110957454, guid: 6352a2d415a72bb4da24457b69d91713, type: 3}
+  animator: {fileID: 461593267534937670}
+  hitSound: {fileID: 8300000, guid: 381a6cc4776a4c44cba7e8ab77a4546b, type: 3}
+  coinSound: {fileID: 8300000, guid: cd1e7c7bb0ac2b94b91591621c38ff32, type: 3}
+  height: 0.8

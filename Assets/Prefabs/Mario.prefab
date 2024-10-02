@@ -170,12 +170,10 @@ MonoBehaviour:
     jumpPower: 13
     maxJumpHeight: 3
     falling: 0
-    jumpCount: 1
   runState:
     mario: {fileID: 6054904185904563964}
   <rigid>k__BackingField: {fileID: 6054904185904563967}
   <render>k__BackingField: {fileID: 6054904185904563938}
-  <body>k__BackingField: {fileID: 0}
   acceleration: 20
   <deceleration>k__BackingField: 10
   <currentSpeed>k__BackingField: 0
@@ -192,6 +190,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   UIcontroller: {fileID: 0}
+  jumpCount: 1
   ground:
     serializedVersion: 2
     m_Bits: 64
@@ -199,3 +198,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   bigMario: {fileID: 3951946370318361319, guid: 9c544f0fbcf1f5b40bd667d252450e2a, type: 3}
+  fireMario: {fileID: 5735071706738478296, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
+  raccoonMario: {fileID: 6235891186421553267, guid: a14bbf68c8f23324296079ae6419320c, type: 3}

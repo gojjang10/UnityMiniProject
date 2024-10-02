@@ -27,7 +27,10 @@ public class SoundManager : MonoBehaviour
     public void PlayBGM(AudioClip clip)
     {
         bgm.clip = clip;
+        bgm.ignoreListenerPause = true;
+        Debug.Log($"BGM 클립 이름 : {bgm.clip.name}");
         bgm.Play();
+
     }
 
     public void StopBGM(AudioClip clip)

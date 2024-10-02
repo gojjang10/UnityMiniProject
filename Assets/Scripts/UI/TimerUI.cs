@@ -8,9 +8,11 @@ public class TimerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerUI;
     [SerializeField] TextMeshProUGUI gameOverText;
     [SerializeField] GameScene gameScene;
+    [SerializeField] AudioClip gameOver;
 
     public float timerValue;
     public float resultValue;
+    private bool done;
 
     private void Start()
     {
@@ -21,19 +23,29 @@ public class TimerUI : MonoBehaviour
     {
         if(timerValue >= 0)
         {
-            timerValue -= 1 * Time.deltaTime;
+            if(!GameManager.Instance.gameEnded && !GameManager.Instance.gameCleared)
+            {
+                timerValue -= 1 * Time.deltaTime;
 
-            //Debug.Log($"타이머 값: {timerValue}");
+                resultValue = (int)timerValue;
 
-            resultValue = (int)timerValue;
+                timerUI.text = resultValue.ToString();
 
-            timerUI.text = resultValue.ToString();
-            //timerUI.text = $"{Mathf.CeilToInt(timerValue)}";
+            }
+
         }
         else
         {
-            gameOverText.enabled = true;
-            GameManager.Instance.GameOver();
+            if(!done)
+            {
+                done = true;
+                gameOverText.enabled = true;
+                SoundManager.Instance.LoopBGM(false);
+                SoundManager.Instance.PlayBGM(gameOver);
+                Time.timeScale = 0;
+                GameManager.Instance.GameOver();
+            }
+
         }
     }
 }

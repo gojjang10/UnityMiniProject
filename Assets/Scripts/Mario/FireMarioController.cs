@@ -30,6 +30,7 @@ public class FireMarioController : MarioBassController
         gameOverCoroutine = null;
         curMarioType = MarioType.Fire;
         UIcontroller = GameObject.Find("GameOverText").GetComponent<UIcontroller>();
+        speedUI = GameObject.Find("GameUI").GetComponent<SpeedUI>();
         powerUp = false;
         powerDown = false;
     }
@@ -76,7 +77,7 @@ public class FireMarioController : MarioBassController
             {
                 muzzlePoint.localPosition = new Vector3(Mathf.Abs(muzzlePoint.localPosition.x), muzzlePoint.localPosition.y, muzzlePoint.localPosition.z);
             }
-
+            speedUI.UpdateSpeedUI(currentSpeed, maxSpeed);
             states[(int)curState].Update();
         }
     }
@@ -101,6 +102,10 @@ public class FireMarioController : MarioBassController
             Instantiate(raccoonMario, transform.position, Quaternion.identity);
             Debug.Log("RaccoonMario 생성");
             Destroy(gameObject);
+        }
+        if (collision.collider.CompareTag("Box"))
+        {
+            falling = true;
         }
     }
 

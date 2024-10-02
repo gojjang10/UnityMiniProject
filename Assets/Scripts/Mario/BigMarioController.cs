@@ -29,6 +29,7 @@ public class BigMarioController : MarioBassController
         gameOverCoroutine = null;
         curMarioType = MarioType.Big;
         UIcontroller = GameObject.Find("GameOverText").GetComponent<UIcontroller>();
+        speedUI = GameObject.Find("GameUI").GetComponent<SpeedUI>();
         powerUp = false;
         powerDown = false;
     }
@@ -80,6 +81,10 @@ public class BigMarioController : MarioBassController
             Instantiate(raccoonMario, transform.position, Quaternion.identity);
             Debug.Log("RaccoonMario 생성");
             Destroy(gameObject);
+        }
+        if (collision.collider.CompareTag("Box"))
+        {
+            falling = true;
         }
 
     }

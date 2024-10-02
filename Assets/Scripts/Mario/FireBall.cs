@@ -16,8 +16,16 @@ public class FireBall : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        velocity = rb.velocity;
+
     }
+
+    private void FixedUpdate()
+    {
+        Vector2 currentVelocity = rb.velocity;
+
+        rb.velocity = new Vector2(rb.velocity.x, currentVelocity.y);
+    }
+
 
     public void SetSpeed(Vector2 speed)
     {
@@ -26,24 +34,25 @@ public class FireBall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == 6)
+        if(collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("지면과 닿음");
+            Debug.Log("파이어볼이 지면과 닿음");
             Vector2 curVelocity = rb.velocity;
 
-            
-            if (collision.contacts[0].point.y > lastGround)
+            lastGround = collision.contacts[0].point.y;     // 첫번째 충돌 지점 초기화
+
+            if (collision.contacts[0].point.y > lastGround)         // 이전 충돌 지점보다 더 높다면
             {
                 Debug.Log("if 작동");
-                rb.velocity = new Vector2(curVelocity.x, bounceForce + (collision.contacts[0].point.y - lastGround));
+                rb.velocity = new Vector2(curVelocity.x, bounceForce + (collision.contacts[0].point.y - lastGround));       // 그만큼 더 많이 튀어오른다
             }
             else
             {
                 Debug.Log("else if 작동");
-                rb.velocity = new Vector2(curVelocity.x, bounceForce);
+                rb.velocity = new Vector2(curVelocity.x, bounceForce);      // 아닐 시에는 기본적인 힘으로 진행
             }
 
-            lastGround = collision.contacts[0].point.y;
+
         }
     }
 }

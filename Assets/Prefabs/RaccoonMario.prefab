@@ -232,6 +232,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   smallMario: {fileID: 6054904185904563936, guid: 5988a6d2791ceee41a5a61bad43c3e12, type: 3}
+  fireMario: {fileID: 5735071706738478296, guid: 73cf39aa7fd17014fade79dbb9df96ef, type: 3}
   levelUp: {fileID: 8300000, guid: 32768fbb4ff04ec4283f92b46b9fa780, type: 3}
   raccoonJumpState:
     mario: {fileID: 6235891186421553266}
@@ -248,6 +249,8 @@ MonoBehaviour:
     jump: {fileID: 8300000, guid: 5102d1d1b71d7eb4f87be41d3eb7df13, type: 3}
     jumpPower: 13
   muzzlePoint: {fileID: 3930872796753235666}
+  falling: 0
+  canFly: 0
 --- !u!114 &4153601622931117906
 MonoBehaviour:
   m_ObjectHideFlags: 0

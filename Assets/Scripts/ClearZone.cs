@@ -18,7 +18,7 @@ public class ClearZone : MonoBehaviour
         {
             SoundManager.Instance.LoopBGM(false);
             SoundManager.Instance.PlayBGM(bgm);
-            
+            Time.timeScale = 0;
             gameClearText.SetActive(true);
             GameManager.Instance.GameClear();
 

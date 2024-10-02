@@ -5,7 +5,7 @@ using UnityEngine;
 public class PooledObject : MonoBehaviour
 {
     public ObjectPool returnPool;
-    [SerializeField] private float returnTime = 5;
+    [SerializeField] private float returnTime = 2f;
 
     [SerializeField] private float curTime;
 
@@ -17,7 +17,8 @@ public class PooledObject : MonoBehaviour
     private void Update()
     {
         curTime -= Time.deltaTime;
-        if (curTime < 0)
+        Debug.Log($"현재 시간{curTime}");
+        if (curTime <= 0)
         {
             returnPool.ReturnPool(this);
         }
@@ -25,7 +26,7 @@ public class PooledObject : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 3)
+        if (collision.gameObject.CompareTag("Goomba"))
         {
             returnPool.ReturnPool(this);
         }

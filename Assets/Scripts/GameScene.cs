@@ -7,33 +7,41 @@ public class GameScene : MonoBehaviour
     [SerializeField] GameObject titleScreen;
     [SerializeField] GameObject anykey;
     [SerializeField] GameObject gameUI;
+    [SerializeField] GameObject video;
     [SerializeField] AudioClip bgm;
 
     private bool gameStart = false;
+    private bool videoStart = false;
+    WaitForSecondsRealtime delay = new WaitForSecondsRealtime(26.3f);
 
 
 
     private void Start()
     {
         Time.timeScale = 0f;
-        GameManager.Instance.gameEnded = false;
 
         SoundManager.Instance.LoopBGM(true);
         SoundManager.Instance.StopCurBGM();
+        video.SetActive(true);
         titleScreen.gameObject.SetActive(true);
         anykey.SetActive(true);
         gameUI.SetActive(false);
+
+        StartCoroutine(AutoStart());
     }
 
     private void Update()
     {
-
-
-        if (!gameStart && Input.anyKeyDown)
+        if (Input.anyKeyDown && !videoStart)
+        {
+            video.SetActive(false);
+            videoStart = true;
+            StopAllCoroutines();
+        }
+        else if (!gameStart && Input.anyKeyDown && videoStart)
         {
             StartGame();
         }
-
     }
 
     private void StartGame()
@@ -53,6 +61,17 @@ public class GameScene : MonoBehaviour
         else
         {
             Debug.Log("SoundManager 인스턴스가 null입니다.");
+        }
+    }
+
+    private IEnumerator AutoStart()
+    {
+        yield return delay;
+
+        if(!videoStart)
+        {
+            video.SetActive(false);
+            videoStart = true;
         }
     }
 }

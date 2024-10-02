@@ -11,6 +11,8 @@ using UnityEngine.Events;
 public class MarioController : MarioBassController
 {
     [SerializeField] protected GameObject bigMario;
+    [SerializeField] protected GameObject fireMario;
+    [SerializeField] protected GameObject raccoonMario;
     private void Awake()
     {
         states[(int)State.Idle] = idleState;
@@ -29,7 +31,8 @@ public class MarioController : MarioBassController
         powerDown = false;
 
         UIcontroller = GameObject.Find("GameOverText").GetComponent<UIcontroller>();
-        
+        speedUI = GameObject.Find("GameUI").GetComponent<SpeedUI>();
+
     }
 
     private void Start()
@@ -84,6 +87,25 @@ public class MarioController : MarioBassController
             Instantiate(bigMario, transform.position, Quaternion.identity);
             Debug.Log("BigMario 생성");
             Destroy(gameObject);
+        }
+        else if (collision.collider.CompareTag("Flower"))
+        {
+            powerUp = true;
+            Instantiate(fireMario, transform.position, Quaternion.identity);
+            Debug.Log("FireMario 생성");
+            Destroy(gameObject);
+        }
+        else if (collision.collider.CompareTag("Leaf"))
+        {
+            powerUp = true;
+            Instantiate(raccoonMario, transform.position, Quaternion.identity);
+            Debug.Log("RaccoonMario 생성");
+            Destroy(gameObject);
+        }
+
+        if(collision.collider.CompareTag("Box"))
+        {
+            falling = true;
         }
     }
 

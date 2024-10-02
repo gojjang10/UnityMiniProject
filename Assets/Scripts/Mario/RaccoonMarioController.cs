@@ -19,7 +19,7 @@ public class RaccoonMarioController : MarioBassController
 
     private Coroutine flyOn;
 
-    [SerializeField] private bool falling;
+    [SerializeField] private bool raccoonFalling;
     [SerializeField] private bool canFly;
 
     private WaitForSeconds fallingDelay = new WaitForSeconds(2.5f);
@@ -40,6 +40,7 @@ public class RaccoonMarioController : MarioBassController
         gameOverCoroutine = null;
         curMarioType = MarioType.Raccoon;
         UIcontroller = GameObject.Find("GameOverText").GetComponent<UIcontroller>();
+        speedUI = GameObject.Find("GameUI").GetComponent<SpeedUI>();
         powerUp = false;
         powerDown = false;
     }
@@ -90,7 +91,7 @@ public class RaccoonMarioController : MarioBassController
             {
                 muzzlePoint.localPosition = new Vector3(Mathf.Abs(muzzlePoint.localPosition.x), muzzlePoint.localPosition.y, muzzlePoint.localPosition.z);
             }
-
+            speedUI.UpdateSpeedUI(currentSpeed, maxSpeed);
             states[(int)curState].Update();
         }
     }
@@ -116,6 +117,10 @@ public class RaccoonMarioController : MarioBassController
             Instantiate(fireMario, transform.position, Quaternion.identity);
             Debug.Log("FireMario 생성");
             Destroy(gameObject);
+        }
+        if (collision.collider.CompareTag("Box"))
+        {
+            falling = true;
         }
 
     }
@@ -157,7 +162,6 @@ public class RaccoonMarioController : MarioBassController
         [SerializeField] float jumpPower;
         [SerializeField] float maxJumpHeight;
         private float startJumpHeight;
-        public bool falling = false;
         public int jumpCount = 1;
 
 
@@ -167,7 +171,7 @@ public class RaccoonMarioController : MarioBassController
             //maxJumpHeight = curJumpHeight;
             //mario.rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             startJumpHeight = mario.transform.position.y;
-            falling = false;
+            mario.falling = false;
 
             if (jumpCount == 1)
             {
@@ -189,11 +193,11 @@ public class RaccoonMarioController : MarioBassController
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 Debug.Log("스페이스바 떼짐");
-                falling = true;
+                mario.falling = true;
             }
 
 
-            if (falling)                            // 너구리마리오가 떨어지고 있을때
+            if (mario.falling)                            // 너구리마리오가 떨어지고 있을때
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -239,7 +243,7 @@ public class RaccoonMarioController : MarioBassController
             {
                 Debug.Log("픽스드업데이트로 현재 점프중");
 
-                if (Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight < maxJumpHeight && !falling)
+                if (Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight < maxJumpHeight && !mario.falling)
                 {
                     Debug.Log("위로 힘 가해주기");
                     mario.rigid.velocity = new Vector2(mario.rigid.velocity.x, jumpPower);
@@ -247,7 +251,7 @@ public class RaccoonMarioController : MarioBassController
 
                 if (Input.GetKey(KeyCode.Space) && currentHeight - startJumpHeight >= maxJumpHeight)
                 {
-                    falling = true;
+                    mario.falling = true;
                 }
             }
 
