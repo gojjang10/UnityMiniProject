@@ -16,6 +16,7 @@ TagManager:
   - Tail
   - Leaf
   - Coin
+  - Wall
   layers:
   - Default
   - TransparentFX

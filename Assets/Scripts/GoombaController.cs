@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GoombaController : Monster
 {
@@ -11,6 +12,8 @@ public class GoombaController : Monster
 
     [SerializeField] AudioClip hitSFX;
     [SerializeField] AudioClip steppedSfx;
+
+    private int moveDirection = -1;
     private void Start()
     {
         live = true;
@@ -19,20 +22,13 @@ public class GoombaController : Monster
     {
         if (live && !GameManager.Instance.gameEnded)
         {
-            rigid.AddForce(Vector2.left * movePower, ForceMode2D.Impulse);
-
-            if (rigid.velocity.x > maxMoveSpeed)
-            {
-                rigid.velocity = new Vector2(maxMoveSpeed, rigid.velocity.y);
-            }
-            else
-            {
-                rigid.velocity = new Vector2(-maxMoveSpeed, rigid.velocity.y);
-            }
+            // 속도(velocity)를 직접 설정하여 몬스터를 이동시킴
+            rigid.velocity = new Vector2(moveDirection * maxMoveSpeed, rigid.velocity.y);
         }
         else
         {
-            return;
+            // 몬스터가 죽었거나 게임이 종료되면 움직임을 멈춤
+            rigid.velocity = Vector2.zero;
         }
 
     }
@@ -49,6 +45,12 @@ public class GoombaController : Monster
             live = false;
 
             StartCoroutine(AnimPlay());
+        }
+
+        if(collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Goomba"))
+        {
+            Debug.Log("굼바가 벽에 부딪혔습니다.");
+            moveDirection *= -1;
         }
         
         if(collision.collider.CompareTag("FireBall"))

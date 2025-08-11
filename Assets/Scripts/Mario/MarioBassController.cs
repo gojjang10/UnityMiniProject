@@ -3,12 +3,13 @@ using UnityEngine.Events;
 
 public class MarioBassController : MonoBehaviour
 {
+    // 마리오 타입 (열거형) 변수
     public MarioType curMarioType;
 
-    [Header("State")]
+    [Header("State")]   // 현재 상태
     [SerializeField] protected State curState = State.Idle;
 
-    protected BaseMarioState[] states = new BaseMarioState[(int)State.Size];
+    protected BaseMarioState[] states = new BaseMarioState[(int)State.Size];    // 베이스 함수들을 가지고 있는 베이스상태 클래스 배열
     [SerializeField] protected IdleState idleState;
     [SerializeField] protected WalkState walkState;
     [SerializeField] protected JumpState jumpState;
@@ -145,7 +146,7 @@ public class MarioBassController : MonoBehaviour
             {
                 //Debug.Log($"콜라이더 감지 {hit.collider.name}");
 
-                if (hit.collider.gameObject.CompareTag("Ground"))    // 레이어 6번 : Ground
+                if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("Wall"))    // 레이어 6번 : Ground
                 {
                     Debug.Log("콜라이더 감지 6번");
                     isGrounded = true;
